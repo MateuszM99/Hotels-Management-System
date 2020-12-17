@@ -39,6 +39,13 @@ $base-color: #14171f;
             &:hover{
                 background-color:#252938;
             }        
+            span{
+                display: flex;
+                align-items: center;
+                img{
+                    padding-right: 5px;
+                }
+            }
         }
     }
 }

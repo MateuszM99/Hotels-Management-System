@@ -5,7 +5,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import './react_dates_overrides.scss';
 import { Button, SelectorButton } from '../Button/Buttons';
 import './style.scss';
-import { DefaultInput } from '../Inputs/Inputs';
+import { LocationInput } from '../Inputs/Inputs';
 
 
 export class Search extends Component {
@@ -21,10 +21,17 @@ export class Search extends Component {
         return (
             <div className="main__search">
                 <div className="main_search_components">
-                    <DefaultInput></DefaultInput>
+                    <LocationInput></LocationInput>
                     <SelectorButton>2 Adults  · 0 Children  · 1 Room</SelectorButton>
                     <Button>Search</Button>
-                    <DateRangePicker
+                </div>
+            </div>
+        )
+    }
+}
+
+/*
+<DateRangePicker
                         startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                         startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
                         endDate={this.state.endDate} // momentPropTypes.momentObj or null,
@@ -33,10 +40,6 @@ export class Search extends Component {
                         focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
                         onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                     />
-                </div>
-            </div>
-        )
-    }
-}
+*/
 
 export default Search

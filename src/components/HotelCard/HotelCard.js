@@ -2,7 +2,7 @@ import React from 'react'
 
 function HotelCard() {
     return (
-        <div>
+        <div className="hotel__card__main">
             
         </div>
     )
