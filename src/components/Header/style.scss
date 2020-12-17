@@ -1,0 +1,44 @@
+$base-color: #14171f;
+
+.main__header{
+    min-height: 150px;
+    background-color: $base-color;
+    display: flex;
+}
+
+.main__header__buttons {
+    display: flex;
+    justify-self: flex-end;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-right: 250px;
+}
+
+.main__header__nav{
+    display: flex;
+    margin-top: 75px;
+    margin-left: 400px;
+    width: 400px;
+    ul{
+        display: flex;
+        list-style: none;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        li{  
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 32px;
+            margin-right: 20px; 
+            border: solid 1px $base-color;
+            border-radius: 16px;
+            cursor:pointer;
+            &:hover{
+                background-color:#252938;
+            }        
+        }
+    }
+}
