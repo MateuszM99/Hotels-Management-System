@@ -12,6 +12,13 @@ export const Button = styled.button`
   font-weight: 700;
   font-size: 14px;
   border : solid 1px black;
+  
+  ${props =>
+    props.small &&
+    `
+      width: 36px;
+      height: 36px
+    `};
 `
 
 export const SelectorButton = styled.button`
