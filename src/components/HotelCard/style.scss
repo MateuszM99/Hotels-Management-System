@@ -10,6 +10,9 @@
     border: solid 1px black;
     margin-top: 20px;
     margin-bottom: 20px;
+    img{
+        padding: 5px;
+    }
 }
 
 .hotel__card__info{
@@ -37,6 +40,7 @@
     align-items: center;
     img{
         object-fit: contain;
+        padding: 0px;
     }
 }
 
