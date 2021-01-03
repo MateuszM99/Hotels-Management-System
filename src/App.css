@@ -41,3 +41,15 @@ a{
   color: inherit; /* blue colors for links too */
   text-decoration: inherit; /* no underline */
 }
+
+.sliderimg{
+  width: 50%;
+  height: 400px;
+  object-fit: cover
+}
+
+.alice-carousel ul li img{
+  height: 400px;
+  width: 50%;
+  object-fit: cover;
+}

@@ -2,9 +2,14 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 
-export const Button = styled.button`
-  width: 125px;
-  height: 44px;
+export const Button = styled.button.attrs(props => ({
+  marginLeft : props.marginLeft,
+  marginBottom : props.marginBottom,
+  width : props.width || "125px",
+  height : props.height || "44px",
+}))`
+  width: ${props => props.width};
+  height: ${props => props.height};
   background-color: white;
   border-style: none;
   outline: none;
@@ -12,7 +17,8 @@ export const Button = styled.button`
   font-weight: 700;
   font-size: 14px;
   border : solid 1px black;
-  
+  margin-left: ${props => props.marginLeft};
+  margin-bottom : ${props => props.marginBottom};
   ${props =>
     props.small &&
     `

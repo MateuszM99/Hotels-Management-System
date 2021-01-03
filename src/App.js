@@ -21,9 +21,11 @@ function App() {
             <SignUp/>
           </Route>
           <Route path="/hotel/:hotelName">
+            <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
               <Header/>
               <Search/>
               <Hotel_Details/>
+            </div>
           </Route>
           <Route path="/">
             <Header/>

@@ -1,0 +1,15 @@
+.thumbs__list{
+    display: flex;
+    justify-content: center;
+    list-style : none;
+    img{
+        margin: 5px;
+        width: 100px;
+        height: 64px;
+    }
+}
+
+.nav__buttons{
+    display: flex;
+    justify-content: space-between;
+}

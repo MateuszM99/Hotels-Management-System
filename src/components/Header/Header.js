@@ -6,7 +6,7 @@ import './style.scss'
 
 function Header() {
     return (
-        <header>
+        <header style={{display:'flex',width:'100%'}}>
             <div className="main__header">
                 <nav className="main__header__nav">
                     <ul>
@@ -25,8 +25,8 @@ function Header() {
                     </ul>
                 </nav>
                 <div className="main__header__buttons">
-                    <Button>Sign In</Button>
-                    <Button>Sign Up</Button>
+                    <Button height="40px">Sign In</Button>
+                    <Button marginLeft="20px" height="40px">Sign Up</Button>
                 </div>    
             </div>
         </header>

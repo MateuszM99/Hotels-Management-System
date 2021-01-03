@@ -1,0 +1,165 @@
+.hotel__details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin-bottom: 100px;
+}
+
+.hotel__details__main{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.hotel__details__header{
+    display: flex;
+    h3{
+        margin-right: 10px;
+    }
+    img{
+        object-fit: contain;
+    }
+    margin-top: 25px;
+}
+
+.hotel__details__address {
+    display: flex;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.hotel__details__description{
+    display: flex;
+    width: 70%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.hotel__details__description__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 70%;
+}
+
+.hotel__details__description__reserve{
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px lightgrey;
+}
+
+.hotel__details__availibility{
+    display: flex;
+    width: 70%;
+    flex-direction: column;
+    align-items: flex-start;
+    h3{
+        margin-bottom: 15px;
+    }
+}
+
+.hotel__details__availibility__settings{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 125px;
+    align-items: center;
+    justify-content: center;
+    border-bottom: solid 3px  lightgray;
+    border-top: solid 3px  lightgray;
+    background-color:#14171f;
+}
+
+.hotel__details__availibility__date__picker{
+    display: flex;
+}
+
+.hotel__details__availibility__rooms{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    justify-content: center;
+    margin-right: 125px;
+    p{
+        color: white;
+    }
+
+    select{
+        outline: none;
+        margin: 0;
+        width: 70px;
+        cursor: inherit;
+        line-height: inherit; 
+        margin-right: 20px;
+        margin-left: 5px;
+    }
+    
+}
+
+.hotel__details__rooms__list{
+
+    margin-top: 30px;
+
+    table {
+        display: grid;
+        border-collapse: collapse;
+        min-width: 100%;
+        grid-template-columns: 
+          minmax(375px, 2fr)
+          minmax(375px, 2fr)
+          minmax(100px, 1fr)
+      }
+
+        thead {
+            display: contents;
+            line-height: 2px;
+            tr{
+                display: contents;
+                line-height: 2px; 
+            }
+        }
+        
+        tbody{
+            display: contents;
+            line-height: 25px;
+            tr{
+                display: contents;
+                line-height: 25px;
+            }
+        }
+
+        th,
+        td {
+        padding: 15px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border: solid 1px lightgrey;
+        }
+
+        th {
+        position: sticky;
+        top: 0;
+        background: #14171f;
+        font-weight: normal;
+        font-size: 0.9rem;
+        color: white;
+        }
+
+        th:last-child {
+            border: 0;
+          }
+          
+          td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            color: #808080;
+          }
+          
+          tr:nth-child(even) td {
+            background: #f8f6ff;
+          }
+}
