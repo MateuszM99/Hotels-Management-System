@@ -1,0 +1,38 @@
+$base-color: #14171f;
+
+
+.hotel__management__navbar{
+    display: flex;
+    width: 250px;
+    min-height: 91vh;
+    flex-direction: column;
+    background-color: $base-color;
+}
+
+.hotel__management__navbar__nav{
+    display: flex;
+    flex-direction: column;
+}
+
+.hotel__management__navbar__nav__list{
+    border-top: 1px solid #252831;
+    list-style: none;
+    li{
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #252831;
+        cursor: pointer;
+        width: 100%;
+        height: 75px;
+        &:hover{
+            background-color: #252831;
+        }
+
+        p{
+            font-size: 16px;
+            font-weight: 400;
+            padding-left: 25px;
+        }
+    }
+}

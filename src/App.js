@@ -8,6 +8,7 @@ import Header from './components/Header/Header'
 import Hotels_List from './components/Hotels_List/Hotels_List'
 import Search from './components/Search/Search'
 import Hotel_Details from './components/Hotel_Details/Hotel_Details'
+import Hotel_Management from './components/Hotel_Management/Hotel_Management';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
               <Search/>
               <Hotel_Details/>
             </div>
+          </Route>
+          <Route path="/management">
+              <Hotel_Management/>
           </Route>
           <Route path="/">
             <Header/>

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 export const Button = styled.button.attrs(props => ({
   marginLeft : props.marginLeft,
   marginBottom : props.marginBottom,
+  marginTop : props.marginTop,
   width : props.width || "125px",
   height : props.height || "44px",
 }))`
@@ -19,6 +20,7 @@ export const Button = styled.button.attrs(props => ({
   border : solid 1px black;
   margin-left: ${props => props.marginLeft};
   margin-bottom : ${props => props.marginBottom};
+  margin-top : ${props => props.marginTop};
   ${props =>
     props.small &&
     `

@@ -1,0 +1,24 @@
+$base-color: #131620;
+
+.hotel__management__header{
+    display: flex;
+    background-color: $base-color;
+    min-height: 9vh;
+}
+
+.hotel__management__header__nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    span{
+        display: flex;
+        justify-content: space-around;
+        justify-self: flex-end;
+        margin-left: auto;
+        margin-right: 100px;
+        p{
+            color:rgb(58, 58, 66);
+            margin-right: 75px;
+        }
+    }
+}

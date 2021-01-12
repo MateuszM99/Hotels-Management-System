@@ -1,0 +1,88 @@
+.cm__hotels__create__container{
+    margin: 75px;
+    Form{
+    display: flex;
+    flex-direction: column;   
+    }
+    span{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 5px;
+        margin-top: 25px;
+    }
+}
+
+.cm__hotels__create__container__label{
+    display: flex;
+    width: 15%;  
+    justify-content: flex-end;
+    margin-left: auto;
+    font-weight: 700;
+}
+
+.cm__hotels__create__container__input{
+    border-style: none;
+    outline: none;
+    border: solid 1px lightgray;
+    font-size: 15px; 
+    height: 30px;
+    width: 600px;
+    padding-left: 5px;
+    margin-left: 50px;
+}
+
+.cm__hotels__create__container__textarea{
+    border-style: none;
+    outline: none;
+    border: solid 1px lightgray;
+    font-size: 15px; 
+    height: 150px;
+    width: 600px;
+    padding-left: 5px;
+    padding-top: 5px;
+    margin-left: 50px;
+}
+
+.cm__hotels__create__container__file{
+    border-style: none;
+    outline: none;
+    border: solid 1px lightgray;
+    font-size: 15px; 
+    height: 30px;
+    width: 600px;
+    margin-left: 50px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+
+.cm__hotels__create__container__option__button{
+    outline: none;
+    border-style:none;
+    height: 30px;
+    width: 120px;
+    background-color: rgb(60, 60, 65);
+    color: white;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.cm__hotels__create__container__create__button{
+    outline: none;
+    border-style:none;
+    height: 50px;
+    width: 150px;
+    background-color: rgb(60, 60, 65);
+    color: white;
+    cursor: pointer;
+    margin-bottom: 30px;
+    align-self: flex-end;
+}
+
+.cm__hotels__create__container__validation{
+    font-size: 13px;
+    color: red;
+    display: flex;
+    margin-left: 160px;
+}
