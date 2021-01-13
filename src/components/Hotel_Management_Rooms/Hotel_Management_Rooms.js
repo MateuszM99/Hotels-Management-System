@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './style.scss'
 import {Link} from 'react-router-dom'
 import RoomTR from './RoomTR'
@@ -11,7 +11,7 @@ function Hotel_Management_Rooms() {
         async function getData(){
             try{
                 let response = null //request wasz
-                console.log(response.data);
+                console.log(response);
                 setRooms(response.data); 
             } catch(err) {
                 // TODO if error
@@ -22,6 +22,9 @@ function Hotel_Management_Rooms() {
     },[])
 
     const handleSearchChange = (e) => {
+        function setSearchString(value) {
+        }
+
         setSearchString(e.target.value)
     }
 

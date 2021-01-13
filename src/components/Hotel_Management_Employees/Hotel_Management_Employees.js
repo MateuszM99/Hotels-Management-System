@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './style.scss'
 import {Link} from 'react-router-dom'
 import EmployeeTR from './EmployeeTR'
+import {getAllEmployees} from "../../api/EmployeesManagementRequests";
 
 function Hotel_Management_Employees() {
 
@@ -10,9 +11,7 @@ function Hotel_Management_Employees() {
     useEffect(() => {
         async function getData(){
             try{
-                let response = null //request wasz
-                console.log(response.data);
-                setEmployees(response.data); 
+                getAllEmployees(localStorage.getItem("jwtToken")).then(r => setEmployees(r.data)) //request wasz
             } catch(err) {
                 // TODO if error
             }
@@ -22,6 +21,10 @@ function Hotel_Management_Employees() {
     },[])
 
     const handleSearchChange = (e) => {
+        function setSearchString(value) {
+
+        }
+
         setSearchString(e.target.value)
     }
 
@@ -35,21 +38,19 @@ function Hotel_Management_Employees() {
             <table>
                 <thead>
                     <tr>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Phone number</th>
+                    <th>Birthdate</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                    <th>Manage</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {employees?.map(employee => {
-                        <EmployeeTR key={employee.id}/>
-                    })}
+                    {employees?.map(employee => <EmployeeTR key={employee.id} employee={employee}/>)}
                 </tbody>
             </table>
         </div>
