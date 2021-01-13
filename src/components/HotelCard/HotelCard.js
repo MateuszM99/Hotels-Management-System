@@ -1,9 +1,12 @@
 import React from 'react'
 import { Button } from '../Button/Buttons'
 import './style.scss'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 
 function HotelCard(props) {
+
+    const {hotelId} = useParams();
+
     return (
         <div className="hotel__card__main">
             <div>
@@ -34,7 +37,7 @@ function HotelCard(props) {
                 <p>Śniadanie wliczone w cene</p>
                 </div>
                 <span className="hotel__card__header__button">
-                    <Link to='/hotel/1'>
+                    <Link to={`/hotel/${hotelId}`}>
                         <Button>
                             Check out
                         </Button>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import './style.scss'
 import {Link} from 'react-router-dom'
 import RoomTR from './RoomTR'
@@ -6,6 +6,7 @@ import RoomTR from './RoomTR'
 function Hotel_Management_Rooms() {
 
     const [rooms,setRooms] = useState(null);
+    const [searchString,setSearchString] = useState('');
     
     useEffect(() => {
         async function getData(){

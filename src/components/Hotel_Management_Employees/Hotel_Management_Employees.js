@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import './style.scss'
 import {Link} from 'react-router-dom'
 import EmployeeTR from './EmployeeTR'
@@ -6,6 +6,7 @@ import EmployeeTR from './EmployeeTR'
 function Hotel_Management_Employees() {
 
     const [employees,setEmployees] = useState(null);
+    const [searchString,setSearchString] = useState('');
     
     useEffect(() => {
         async function getData(){
