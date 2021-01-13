@@ -8,7 +8,7 @@ import {registerRequest} from '../../api/SignUpRequest'
 
 function SignUp() {
     return (
-        <div>
+        <div className="signup__container">
             <Formik
                 initialValues={{
                     email: '',
