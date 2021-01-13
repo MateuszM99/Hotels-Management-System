@@ -3,6 +3,7 @@ import {Formik,Form, yupToFormErrors,Field} from 'formik';
 import * as Yup from 'yup';
 import {Link} from 'react-router-dom';
 import './style.scss';
+import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
 
 function SignUp() {
     return (
@@ -66,6 +67,11 @@ function SignUp() {
                             <Field type="password" placeholder="Enter your password" name="password"></Field>
                             {errors.password && touched.password ? <div className="signup__container__box__validation">{errors.password}</div> : null}
                             </div>
+                            <div className="signup__container__box__input">
+                                <label>Birth Date</label>
+                                <DateSingleInput/>
+                            </div>
+                            
                             <button className="signup__container__box__button" type="submit">{isSubmitting ? 'Signin up ...' : 'Sign up'}</button>
                             {status && status.errorMessage ? (
                                     <div className="signup__container__box__validation">{status.errorMessage}</div>

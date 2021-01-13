@@ -1,8 +1,9 @@
 import React from 'react'
 import { Button } from '../Button/Buttons'
 import './style.scss'
+import {Link} from 'react-router-dom'
 
-function HotelCard() {
+function HotelCard(props) {
     return (
         <div className="hotel__card__main">
             <div>
@@ -11,7 +12,7 @@ function HotelCard() {
             <div className="hotel__card__info">
                 <div className="hotel__card__header">
                     <div className="hotel__card__header__name__stars">
-                        <h3>Hotel Name</h3>
+                        <h3>{props.hotelName}</h3>
                         <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
                         <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
                         <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
@@ -26,14 +27,18 @@ function HotelCard() {
                         <Button small>9.5</Button>
                     </div>
                 </div>
-                <a>Location name</a>
+                <a>{props.location}</a>
                 <div className="hotel__card__hotel__info">
                 <p>Pokoj jakis tam</p>
                 <p>Łóżka </p>
                 <p>Śniadanie wliczone w cene</p>
                 </div>
                 <span className="hotel__card__header__button">
-                    <Button>Check out</Button>
+                    <Link to='/hotel/1'>
+                        <Button>
+                            Check out
+                        </Button>
+                    </Link>
                 </span>
             </div>
         </div>
