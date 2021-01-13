@@ -3,11 +3,8 @@ import { Formik, Form, yupToFormErrors, Field } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import './style.scss';
-<<<<<<< HEAD
 import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
-=======
-import { registerRequest } from '../../api/SignUpRequest';
->>>>>>> origin/login-register
+import {registerRequest} from '../../api/SignUpRequest'
 
 function SignUp() {
     return (
