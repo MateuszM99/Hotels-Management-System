@@ -110,6 +110,7 @@
         grid-template-columns: 
           minmax(375px, 2fr)
           minmax(375px, 2fr)
+          minmax(375px, 2fr)
           minmax(100px, 1fr)
       }
 
@@ -155,6 +156,9 @@
           }
           
           td {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding-top: 10px;
             padding-bottom: 10px;
             color: #808080;
