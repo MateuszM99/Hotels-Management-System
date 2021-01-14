@@ -46,12 +46,12 @@ function App() {
               <Hotel_Details/>
             </div>
           </Route>
-          <PrivateRoute path="/management" component={Hotel_Management}/>
-          <Route path="/reserve">
+          <Route path="/hotel/:hotelName/reserve/:roomId">
               <Header/>
               <Search/>
               <Room_Reservation_Form/>
           </Route>
+          <PrivateRoute path="/management" component={Hotel_Management}/>
           <Route path="/">
             <Header/>
             <Search/>

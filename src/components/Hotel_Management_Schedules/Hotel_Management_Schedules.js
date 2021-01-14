@@ -1,6 +1,6 @@
 import React,{useEffect,useState,useReducer} from 'react'
 import './style.scss'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import ScheduleTR from './ScheduleTR';
 import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
 import { ThemeProvider } from "styled-components";
@@ -25,6 +25,7 @@ const initialState = {
 
 function Hotel_Management_Schedules() {
 
+    const {hotelName} = useParams();
     const [schedules,setSchedules] = useState(null);
     const [searchString,setSearchString] = useState('');
     const [date,setDate] = useState(null);
@@ -74,7 +75,7 @@ function Hotel_Management_Schedules() {
                     date={state.date}
                     showDatepicker={state.showDatepicker}
                 />
-                <Link to={''}>Add new schedule</Link>
+                <Link to={`/management/hotelManage/${hotelName}/schedules/addSchedule`}>Add new schedule</Link>
                 <label>Search : </label>
                 <input className="cm__schedules__container__filter__input"></input>
             </div>

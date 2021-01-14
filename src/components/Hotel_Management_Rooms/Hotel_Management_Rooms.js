@@ -1,10 +1,11 @@
 import React,{useEffect,useState} from 'react'
 import './style.scss'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import RoomTR from './RoomTR'
 
 function Hotel_Management_Rooms() {
 
+    const {hotelName} = useParams();
     const [rooms,setRooms] = useState(null);
     const [searchString,setSearchString] = useState('');
     
@@ -29,7 +30,7 @@ function Hotel_Management_Rooms() {
     return (
         <div className="cm__rooms__container">
             <div className="cm__rooms__container__filter">
-                <Link to={''}>Add room</Link>
+                <Link to={`/management/hotelManage/${hotelName}/rooms/addRoom`}>Add room</Link>
                 <label>Search : </label>
                 <input></input>
             </div>

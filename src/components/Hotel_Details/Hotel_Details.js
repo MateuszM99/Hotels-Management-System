@@ -6,7 +6,7 @@ import {DateRangeInput, DateSingleInput, Datepicker} from '@datepicker-react/sty
 import Select from 'react-select'
 import Room_tr from './Room_tr'
 import { date } from 'yup/lib/locale'
-import {useHistory} from 'react-router-dom'
+import {useHistory,useParams} from 'react-router-dom'
 import { ThemeProvider } from "styled-components";
 
 
@@ -37,9 +37,9 @@ function Hotel_Details() {
     const [childrenCheck,setChildrenCheck] = useState(0);
     const [state, dispatch] = useReducer(reducer, initialState)
     const [minDate,setMinDate] = useState(new Date());
+    const {hotelName} = useParams(); // hotel id albo name
     
     useEffect(() => {
-        console.log(history.location.pathname.split("/").pop()) // daje nam id hotelu
         async function getData(){
             try{
                 let response = null // wasz request

@@ -4,6 +4,7 @@ import * as Yup from 'yup'
 import './style.scss'
 import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
 import { Button } from '../Button/Buttons'
+import {useParams} from 'react-router-dom'
 
 const initialState1 = {
     date : null,
@@ -29,7 +30,8 @@ const initialState1 = {
 
 function Room_Reservation_Form() {
 
-    const [checkOutDate,setCheckOutDate] = useState(null);
+    const {hotelName} = useParams();
+    const {roomId} = useParams();
     const [state1, dispatch1] = useReducer(reducer, initialState1)
     const [state2, dispatch2] = useReducer(reducer, initialState2)
 
