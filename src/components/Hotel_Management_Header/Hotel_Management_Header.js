@@ -4,6 +4,7 @@ import Hotel_Management_HotelCard from '../Hotel_Management_HotelCard/Hotel_Mana
 import { Button } from '../Button/Buttons'
 import {Link} from 'react-router-dom'
 import PersonIcon from '@material-ui/icons/Person';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Hotel_Management_Header() {
     return (
@@ -15,14 +16,20 @@ function Hotel_Management_Header() {
                     </Button>
                 </Link>
                 <Link to='/management/hotels'>
-                <Button marginLeft="100px">
-                    Hotels list
-                </Button>
+                    <Button marginLeft="100px">
+                        Hotels list
+                    </Button>
                 </Link>
-                <span>
-                    <p><PersonIcon/>Welcome Username</p>
-                    <p>Sign out</p>
-                </span>
+                <div className="hotel__management__header__signedIn">
+                    <span>
+                        <PersonIcon/>
+                        <p>Username</p>
+                    </span>
+                    <span>
+                        <ExitToAppIcon/>
+                        <a>Sign out</a>
+                    </span>
+                </div>
             </nav>
         </div>
     )

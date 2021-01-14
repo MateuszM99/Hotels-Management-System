@@ -25,12 +25,6 @@ function Hotel_Management_Navbar(props) {
                             <p>Rooms manage</p>
                         </li>
                     </Link>
-                    <Link>
-                        <li>
-                            <AttachMoneyIcon style={{marginLeft:'15px'}}/>
-                            <p>Price manage</p>
-                        </li>
-                    </Link>
                     <Link to={`/management/hotelManage/${hotelname}/reservations`}>
                     <li>
                         <EventNoteIcon style={{marginLeft:'15px'}}/>

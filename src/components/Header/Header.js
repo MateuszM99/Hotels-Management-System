@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '../Button/Buttons'
 import SignInButton from '../Button/SignInButton'
 import SignUpButton from '../Button/SignUpButton'
 import './style.scss'
+import PersonIcon from '@material-ui/icons/Person';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Header() {
+
+    const [isSignedIn,setIsSignedIn] = useState(false);
+
+    if(localStorage.getItem('userData') != null){
+        setIsSignedIn(true);
+    }
+
     return (
         <header style={{display:'flex',width:'100%'}}>
             <div className="main__header">
@@ -19,7 +28,7 @@ function Header() {
                             </span>
                         </Link>
                         </li>
-                        <li>
+                        <li style={isSignedIn ? {display : 'flex'} : {display: 'none'}}>
                             <Link to='/management/hotels'>
                                 <span>
                                 <img src="https://img.icons8.com/material/24/ffffff/hotel-information.png"/>
@@ -29,7 +38,17 @@ function Header() {
                         </li>
                     </ul>
                 </nav>
-                <div className="main__header__buttons">
+                <div className="main__header__signedIn" style={isSignedIn ? {display : 'flex'} : {display: 'none'}}>
+                    <span>
+                        <PersonIcon/>
+                        <p>Username</p>
+                    </span>
+                    <span>
+                        <ExitToAppIcon/>
+                        <a>Sign out</a>
+                    </span>
+                </div>
+                <div className="main__header__buttons" style={isSignedIn ? {display : 'none'} : {display: 'flex'}}>
                     <Link to='/signIn'>
                         <Button height="40px">
                             Sign In

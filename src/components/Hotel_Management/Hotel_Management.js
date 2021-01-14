@@ -8,6 +8,8 @@ import Hotel_Management_Employees from '../Hotel_Management_Employees/Hotel_Mana
 import AddEmployee from '../Hotel_Management_Employees/AddEmployee'
 import AddRoom from '../Hotel_Management_Rooms/AddRoom'
 import Hotel_Management_Reservations from '../Hotel_Management_Reservations/Hotel_Management_Reservations'
+import Hotel_Management_Schedules from '../Hotel_Management_Schedules/Hotel_Management_Schedules'
+import AddSchedule from '../Hotel_Management_Schedules/AddSchedule'
 
 function Hotel_Management() {
     return (
@@ -34,8 +36,11 @@ function Hotel_Management() {
                     <Route exact path="/management/hotelManage/:hotelname/employees/addEmployee">
                         <AddEmployee/>        
                     </Route>
-                    <Route path="/management/hotelManage/:hotelname/schedules">
-                                                
+                    <Route exact path="/management/hotelManage/:hotelname/schedules">
+                        <Hotel_Management_Schedules/>
+                    </Route>
+                    <Route exact path="/management/hotelManage/:hotelname/schedules/addSchedule">
+                        <AddSchedule/>
                     </Route>
                 </div>
             </Route>

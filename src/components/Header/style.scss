@@ -15,6 +15,30 @@ $base-color: #14171f;
     margin-right: 250px;
 }
 
+.main__header__signedIn{
+    display: flex;
+    height: 50px;
+    justify-self: flex-end;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-right: 250px;
+    span{
+        display: flex;
+        padding-left: 25px;
+        align-items: center;
+        color: rgb(77, 76, 85);
+        a,p{
+            padding-left: 5px;
+        }
+        a{
+            cursor: pointer;
+            &:hover{
+                color: rgb(116, 116, 119);
+            }
+        }
+    }
+}
+
 .main__header__nav{
     display: flex;
     margin-top: 75px;

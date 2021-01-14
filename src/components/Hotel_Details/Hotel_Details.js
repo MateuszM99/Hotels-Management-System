@@ -7,6 +7,7 @@ import Select from 'react-select'
 import Room_tr from './Room_tr'
 import { date } from 'yup/lib/locale'
 import {useHistory} from 'react-router-dom'
+import { ThemeProvider } from "styled-components";
 
 
 const initialState = {
@@ -87,6 +88,21 @@ function Hotel_Details() {
     }
 
     return (
+        <ThemeProvider
+        theme={{
+        breakpoints: ["32em", "48em", "64em"],
+        reactDatepicker: {
+          daySize: [36, 40],
+          fontFamily: "system-ui, -apple-system",
+          colors: {
+            accessibility: "#131620",
+            selectedDay: " #131620",
+            selectedDayHover: "#131620",
+            primaryColor: "#131620"
+          }
+        }
+        }}
+        >
         <div className="hotel__details">
             <div className="hotel__details__main">
                 <div className="hotel__details__header">
@@ -164,6 +180,7 @@ function Hotel_Details() {
                 }
             </div>
         </div>
+        </ThemeProvider>
     );
 }
 

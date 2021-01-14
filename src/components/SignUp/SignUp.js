@@ -1,12 +1,19 @@
 import React from 'react';
 import { Formik, Form, yupToFormErrors, Field } from 'formik';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import './style.scss';
 import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
 import {registerRequest} from '../../api/SignUpRequest'
 
 function SignUp() {
+
+    if(localStorage.getItem('userData') != null){
+        return (
+            <Redirect to="/"/>
+        )
+    }
+
     return (
         <div className="signup__container">
             <Formik

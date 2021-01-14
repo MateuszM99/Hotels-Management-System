@@ -10,8 +10,25 @@ import Search from './components/Search/Search'
 import Hotel_Details from './components/Hotel_Details/Hotel_Details'
 import Hotel_Management from './components/Hotel_Management/Hotel_Management';
 import Room_Reservation_Form from './components/Room_Reservation_Form/Room_Reservation_Form';
+import PrivateRoute from './PrivateRoute';
+import axios from 'axios';
 
 function App() {
+
+  if(localStorage.getItem('userData') != null){
+    const userData = JSON.parse(localStorage.getItem('userData'));
+  
+      axios.interceptors.request.use(
+        config => {
+          config.headers.authorization = `Bearer ${userData.token} `;
+          return config;
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    }
+
   return (
     <div className="App">
       <Router>
@@ -29,9 +46,7 @@ function App() {
               <Hotel_Details/>
             </div>
           </Route>
-          <Route path="/management">
-              <Hotel_Management/>
-          </Route>
+          <PrivateRoute path="/management" component={Hotel_Management}/>
           <Route path="/reserve">
               <Header/>
               <Search/>
