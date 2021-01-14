@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState,useReducer} from 'react';
 import { Formik, Form, yupToFormErrors, Field } from 'formik';
 import * as Yup from 'yup';
 import { Link,Redirect } from 'react-router-dom';
@@ -6,7 +6,27 @@ import './style.scss';
 import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
 import {registerRequest} from '../../api/SignUpRequest'
 
+const initialState = {
+    date : null,
+    showDatepicker: false,
+  }
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'focusChange':
+        return {...state, showDatepicker: action.payload}
+      case 'dateChange':
+        return action.payload
+      default:
+        throw new Error()
+    }
+  }
+
+
 function SignUp() {
+
+    const [date,setDate] = useState(null);
+    const [state, dispatch] = useReducer(reducer, initialState)
 
     if(localStorage.getItem('userData') != null){
         return (
@@ -89,7 +109,12 @@ function SignUp() {
                             </div>
                             <div className="signup__container__box__input">
                                 <label>Birth Date</label>
-                                <DateSingleInput/>
+                                <DateSingleInput
+                                    onDateChange={data => dispatch({type: 'dateChange', payload: data})}
+                                    onFocusChange={focusedInput => dispatch({type: 'focusChange', payload: focusedInput})}
+                                    date={state.date}
+                                    showDatepicker={state.showDatepicker}
+                                />
                             </div>
                             
                             <button className="signup__container__box__button" type="submit">{isSubmitting ? 'Signin up ...' : 'Sign up'}</button>

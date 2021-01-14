@@ -1,11 +1,38 @@
-import React from 'react'
+import React,{useEffect,useState,useReducer} from 'react'
 import {Formik,Form,Field, yupToFormErrors} from 'formik'
 import * as Yup from 'yup'
 import './style.scss'
 import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
 import { Button } from '../Button/Buttons'
 
+const initialState1 = {
+    date : null,
+    showDatepicker: false,
+  }
+
+  const initialState2 = {
+    date : null,
+    showDatepicker: false,
+  }
+
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'focusChange':
+        return {...state, showDatepicker: action.payload}
+      case 'dateChange':
+        return action.payload
+      default:
+        throw new Error()
+    }
+  }
+
+
 function Room_Reservation_Form() {
+
+    const [checkOutDate,setCheckOutDate] = useState(null);
+    const [state1, dispatch1] = useReducer(reducer, initialState1)
+    const [state2, dispatch2] = useReducer(reducer, initialState2)
+
     return (
         <div className="reservation__container">   
             <div className="reservation__main__container">
@@ -24,15 +51,11 @@ function Room_Reservation_Form() {
 
                     }}
                     validationSchema={Yup.object({
-                        email: Yup.string()
-                            .email('Invalid email')
-                            .required('Email is required'),
-                        password: Yup.string()
-                            .required('Password is required'),
+                        
                     })}
 
                     onSubmit={(values) => {
-                        
+                        console.log(state1.date);
                     }}
                     >
                     {({ errors, touched, status, isSubmitting }) => (
@@ -147,15 +170,23 @@ function Room_Reservation_Form() {
                                     <span>
                                         <label>Check in date:</label>
                                         <div>
-                                            <DateSingleInput/>
-                                            {errors.postCode && touched.postCode ? <div className="validation">{errors.postCode}</div> : null}
+                                            <DateSingleInput
+                                                onDateChange={data => dispatch1({type: 'dateChange', payload: data})}
+                                                onFocusChange={focusedInput => dispatch1({type: 'focusChange', payload: focusedInput})}
+                                                date={state1.date}
+                                                showDatepicker={state1.showDatepicker}
+                                            />
                                         </div>
                                     </span>
                                     <span>
                                         <label>Check out date:</label>
                                         <div>
-                                            <DateSingleInput/>
-                                            {errors.postCode && touched.postCode ? <div className="validation">{errors.postCode}</div> : null}
+                                            <DateSingleInput
+                                                onDateChange={data => dispatch2({type: 'dateChange', payload: data})}
+                                                onFocusChange={focusedInput => dispatch2({type: 'focusChange', payload: focusedInput})}
+                                                date={state2.date}
+                                                showDatepicker={state2.showDatepicker}
+                                            />
                                         </div>
                                     </span>
                                 </div>
