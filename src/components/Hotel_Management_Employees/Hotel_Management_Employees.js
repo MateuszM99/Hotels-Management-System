@@ -9,7 +9,7 @@ function Hotel_Management_Employees() {
     const [employees,setEmployees] = useState(null);
     const [searchString,setSearchString] = useState('');
     
-
+    console.log(hotelName);
     useEffect(() => {
         async function getData(){
             try{

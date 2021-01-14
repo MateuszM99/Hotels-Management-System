@@ -11,33 +11,33 @@ import {Link, useHistory,useParams} from 'react-router-dom';
 function Hotel_Management_Navbar(props) {
 
     const history = useHistory();
-    const {hotelname} = useParams();
+    const {hotelName} = useParams();
 
-    console.log(hotelname);
+    console.log(hotelName);
 
     return (
         <div className="hotel__management__navbar">
             <nav className="hotel__management__navbar__nav">
                 <ul className="hotel__management__navbar__nav__list">
-                    <Link to={`/management/hotelManage/${hotelname}/rooms`}>
+                    <Link to={`/management/hotelManage/${hotelName}/rooms`}>
                         <li>
                             <HotelIcon style={{marginLeft:'15px'}}/>
                             <p>Rooms manage</p>
                         </li>
                     </Link>
-                    <Link to={`/management/hotelManage/${hotelname}/reservations`}>
+                    <Link to={`/management/hotelManage/${hotelName}/reservations`}>
                     <li>
                         <EventNoteIcon style={{marginLeft:'15px'}}/>
                         <p>Reservation manage</p>
                     </li>
                     </Link>
-                    <Link to={`/management/hotelManage/${hotelname}/employees`}>
+                    <Link to={`/management/hotelManage/${hotelName}/employees`}>
                         <li>
                             <PeopleAltIcon style={{marginLeft:'15px'}}/>
                             <p>Employees manage</p>
                         </li>
                     </Link>
-                    <Link to={`/management/hotelManage/${hotelname}/schedules`}>
+                    <Link to={`/management/hotelManage/${hotelName}/schedules`}>
                         <li>
                             <ScheduleIcon style={{marginLeft:'15px'}}/>
                             <p>Schedules manage</p>
