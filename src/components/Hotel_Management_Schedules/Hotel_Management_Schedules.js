@@ -4,7 +4,7 @@ import {Link, useParams} from 'react-router-dom'
 import ScheduleTR from './ScheduleTR';
 import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
 import { ThemeProvider } from "styled-components";
-import {getCurrentSchedules} from "../../api/EmployeesManagementRequests";
+import {deleteEmployee, deleteSchedule, getCurrentSchedules} from "../../api/EmployeesManagementRequests";
 
 
 const initialState = {
@@ -33,20 +33,33 @@ function Hotel_Management_Schedules() {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        console.log(date);
-        async function getData(){
-            try{
-                let response = await getCurrentSchedules(localStorage.getItem("jwtToken"))
-                console.log(response.data);
-                setSchedules(response.data); 
-            } catch(err) {
-                // TODO if error
-            }
+        if(schedules == null) {
+            getSchedules();
         }
-        
+    },[schedules])
 
-        getData();
-    },[])
+    const getSchedules = async () => {
+        try {
+            let response = await getCurrentSchedules(localStorage.getItem("jwtToken"))
+            console.log(response.data);
+            setSchedules(response.data);
+        } catch (err) {
+            // TODO
+        }
+    }
+
+    const deleteScheduleAsync = async (scheduleId) => {
+        try {
+            await deleteSchedule(scheduleId, localStorage.getItem("jwtToken"));
+        } catch (err) {
+            // TODO if error
+        }
+    }
+
+    const handleDeleteSchedule = async scheduleId => {
+        await deleteScheduleAsync(scheduleId)
+        await getSchedules()
+    }
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value)
@@ -92,7 +105,7 @@ function Hotel_Management_Schedules() {
                 </thead>
                 <tbody>
                     {schedules?.map(schedule => {
-                        return <ScheduleTR key={schedule.id} schedule={schedule}/>
+                        return <ScheduleTR key={schedule.scheduleId} schedule={schedule} onClick={handleDeleteSchedule}/>
                     })}
                 </tbody>
             </table>

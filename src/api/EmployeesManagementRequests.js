@@ -28,3 +28,7 @@ export function addEmployee(registerData, jwtToken) {
 export function getCurrentSchedules(jwtToken) {
     return axios.get(`${baseUrl}admin/employees/schedules/current`, {headers: {'Authorization': "Bearer " + jwtToken}});
 }
+
+export function deleteSchedule(scheduleId, jwtToken) {
+    return axios.delete(`${baseUrl}admin/employees/schedules/` + scheduleId, {headers: {'Authorization': "Bearer " + jwtToken}});
+}

@@ -12,7 +12,9 @@ function ScheduleTR(props) {
             <td>
                 <div className="cm__schedules__container__actions">
                     {/*<Link className="cm__schedules__container__schedule__button" to=''>Edit</Link> */}
-                    <button className="cm__schedules__container__schedule__button">Delete</button>
+                    <button className="cm__schedules__container__schedule__button"
+                            onClick={() => props.onClick(props.schedule.scheduleId)}>Delete
+                    </button>
                 </div>
             </td>
         </tr>
