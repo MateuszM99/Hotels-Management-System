@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '../Button/Buttons'
 import SignInButton from '../Button/SignInButton'
@@ -11,9 +11,11 @@ function Header() {
 
     const [isSignedIn,setIsSignedIn] = useState(false);
 
-    if(localStorage.getItem('userData') != null){
-        setIsSignedIn(true);
-    }
+    useEffect(() => {
+        if(localStorage.getItem('jwtToken') != null){
+            setIsSignedIn(true);
+        }
+    }, [])
 
     return (
         <header style={{display:'flex',width:'100%'}}>

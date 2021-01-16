@@ -2,27 +2,44 @@ import React, {useEffect, useState} from 'react'
 import './style.scss'
 import {Link, useParams} from 'react-router-dom'
 import EmployeeTR from './EmployeeTR'
-import {getAllEmployees} from "../../api/EmployeesManagementRequests";
+import {deleteEmployee, getAllEmployees} from "../../api/EmployeesManagementRequests";
 
 function Hotel_Management_Employees() {
 
-    const [employees,setEmployees] = useState(null);
-    const [searchString,setSearchString] = useState('');
+    const {hotelName} = useParams();
+    const [employees, setEmployees] = useState(null);
+    const [searchString, setSearchString] = useState('');
 
     useEffect(() => {
-        async function getData(){
-            try{
-                getAllEmployees(localStorage.getItem("jwtToken")).then(r => setEmployees(r.data)) //request wasz
-            } catch(err) {
-                // TODO if error
-            }
+        if(employees == null) {
+            getEmployees();
         }
-        
-        getData();
-    },[])
+    }, [employees])
+
+    const getEmployees = async () => {
+        try {
+            let response = await getAllEmployees(localStorage.getItem("jwtToken")); //request wasz
+            setEmployees(response.data)
+        } catch (err) {
+            // TODO if error
+        }
+    }
+
+    const deleteEmployeeAsync = async (employeeId) => {
+        try {
+            let response = await deleteEmployee(employeeId, localStorage.getItem("jwtToken"));
+        } catch (err) {
+            // TODO if error
+        }
+    }
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value)
+    }
+
+    const handleDeleteEmployee = async employeeId => {
+        await deleteEmployeeAsync(employeeId)
+        getEmployees()
     }
 
     return (
@@ -34,7 +51,7 @@ function Hotel_Management_Employees() {
             </div>
             <table>
                 <thead>
-                    <tr>
+                <tr>
                     <th>Id</th>
                     <th>Email</th>
                     <th>Name</th>
@@ -44,10 +61,10 @@ function Hotel_Management_Employees() {
                     <th>Position</th>
                     <th>Salary</th>
                     <th>Manage</th>
-                    </tr>
+                </tr>
                 </thead>
                 <tbody>
-                    {employees?.map(employee => <EmployeeTR key={employee.id} employee={employee}/>)}
+                {employees?.map(employee => <EmployeeTR key={employee.id} employee={employee} onClick={handleDeleteEmployee}/>)}
                 </tbody>
             </table>
         </div>

@@ -3,6 +3,7 @@ import './style.scss'
 import {Link} from 'react-router-dom'
 
 function EmployeeTR(props) {
+
     return (
         <tr>
             <td>{props.employee.id}</td>
@@ -15,8 +16,8 @@ function EmployeeTR(props) {
             <td>{props.employee.salary}</td>
             <td>
                 <div className="cm__employees__container__actions">
-                    <Link className="cm__employees__container__employee__button" to=''>Edit</Link> 
-                    <button className="cm__employees__container__employee__button">Delete</button>
+                    {/*<Link className="cm__employees__container__employee__button" to=''>Edit</Link> */}
+                    <button className="cm__employees__container__employee__button" onClick={() => props.onClick(props.employee.id)}>Delete</button>
                 </div>
             </td>
         </tr>
