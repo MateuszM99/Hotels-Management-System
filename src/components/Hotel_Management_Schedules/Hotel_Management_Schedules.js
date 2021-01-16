@@ -4,6 +4,7 @@ import {Link, useParams} from 'react-router-dom'
 import ScheduleTR from './ScheduleTR';
 import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
 import { ThemeProvider } from "styled-components";
+import {getCurrentSchedules} from "../../api/EmployeesManagementRequests";
 
 
 const initialState = {
@@ -35,7 +36,7 @@ function Hotel_Management_Schedules() {
         console.log(date);
         async function getData(){
             try{
-                let response = null //request wasz
+                let response = await getCurrentSchedules(localStorage.getItem("jwtToken"))
                 console.log(response.data);
                 setSchedules(response.data); 
             } catch(err) {
@@ -82,16 +83,16 @@ function Hotel_Management_Schedules() {
             <table>
                 <thead>
                     <tr>
-                    <th>Employee id</th>
-                    <th>Employee name</th>
-                    <th>Employee position</th>
-                    <th>Working hours</th>
+                    <th>Schedule id</th>
+                    <th>Employee id name</th>
+                    <th>Start time</th>
+                    <th>End time</th>
                     <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {schedules?.map(schedule => {
-                        <ScheduleTR key={schedule.id}/>
+                        return <ScheduleTR key={schedule.id} schedule={schedule}/>
                     })}
                 </tbody>
             </table>

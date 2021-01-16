@@ -24,3 +24,7 @@ export function addEmployee(registerData, jwtToken) {
     };
     return axios.post(`${baseUrl}admin/employees/`, registerEmployeeBody, {headers: {'Authorization': "Bearer " + jwtToken}});
 }
+
+export function getCurrentSchedules(jwtToken) {
+    return axios.get(`${baseUrl}admin/employees/schedules/current`, {headers: {'Authorization': "Bearer " + jwtToken}});
+}
