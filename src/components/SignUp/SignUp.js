@@ -1,36 +1,36 @@
-import React,{useEffect,useState,useReducer} from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import { Formik, Form, yupToFormErrors, Field } from 'formik';
 import * as Yup from 'yup';
-import { Link,Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './style.scss';
-import {DateSingleInput, Datepicker} from '@datepicker-react/styled'
-import {registerRequest} from '../../api/SignUpRequest'
+import { DateSingleInput, Datepicker } from '@datepicker-react/styled'
+import { registerRequest } from '../../api/SignUpRequest'
 
 const initialState = {
-    date : null,
+    date: null,
     showDatepicker: false,
-  }
+}
 
-  function reducer(state, action) {
+function reducer(state, action) {
     switch (action.type) {
-      case 'focusChange':
-        return {...state, showDatepicker: action.payload}
-      case 'dateChange':
-        return action.payload
-      default:
-        throw new Error()
+        case 'focusChange':
+            return { ...state, showDatepicker: action.payload }
+        case 'dateChange':
+            return action.payload
+        default:
+            throw new Error()
     }
-  }
+}
 
 
 function SignUp() {
 
-    const [date,setDate] = useState(null);
+    const [date, setDate] = useState(null);
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    if(localStorage.getItem('userData') != null){
+    if (localStorage.getItem('userData') != null) {
         return (
-            <Redirect to="/"/>
+            <Redirect to="/" />
         )
     }
 
@@ -55,6 +55,8 @@ function SignUp() {
                 })}
 
                 onSubmit={(values) => {
+                    state.date.setDate(state.date.getDate() + 1);
+                    values.dateOfBirth = state.date.toISOString().substring(0, 10);
                     registerRequest(values);
                 }}
             >
@@ -72,11 +74,6 @@ function SignUp() {
                                 <Field type="text" placeholder="Enter your last name" name="lastName"></Field>
                                 {errors.lastName && touched.lastName ? <div className="signup__container__box__validation">{errors.lastName}</div> : null}
                             </div>
-                            {/* <div className="signup__container__box__input">
-                                <label>Username</label>
-                                <Field type="text" placeholder="Enter your username" name="username"></Field>
-                                {errors.username && touched.username ? <div className="signup__container__box__validation">{errors.username}</div> : null}
-                            </div> */}
                             <div className="signup__container__box__input">
                                 <label>E-mail</label>
                                 <Field type="text" placeholder="Enter your email" name="email"></Field>
@@ -98,25 +95,19 @@ function SignUp() {
                                 {errors.password && touched.password ? <div className="signup__container__box__validation">{errors.password}</div> : null}
                             </div>
                             <div className="signup__container__box__input">
-                                <label>Date of birth</label>
-                                <Field type="text" placeholder="Enter your date of birth" name="dateOfBirth"></Field>
-                                {errors.dateOfBirth && touched.dateOfBirth ? <div className="signup__container__box__validation">{errors.dateOfBirth}</div> : null}
-                            </div>
-                            <div className="signup__container__box__input">
                                 <label>Address</label>
-                                <Field type="text" placeholder="Enter your address" name="address"></Field>
+                                <Field type="text" placeholder="Number;Street;City;Postcode" name="address"></Field>
                                 {errors.address && touched.address ? <div className="signup__container__box__validation">{errors.address}</div> : null}
                             </div>
                             <div className="signup__container__box__input">
                                 <label>Birth Date</label>
                                 <DateSingleInput
-                                    onDateChange={data => dispatch({type: 'dateChange', payload: data})}
-                                    onFocusChange={focusedInput => dispatch({type: 'focusChange', payload: focusedInput})}
+                                    onDateChange={data => dispatch({ type: 'dateChange', payload: data })}
+                                    onFocusChange={focusedInput => dispatch({ type: 'focusChange', payload: focusedInput })}
                                     date={state.date}
                                     showDatepicker={state.showDatepicker}
                                 />
                             </div>
-                            
                             <button className="signup__container__box__button" type="submit">{isSubmitting ? 'Signin up ...' : 'Sign up'}</button>
                             {status && status.errorMessage ? (
                                 <div className="signup__container__box__validation">{status.errorMessage}</div>
