@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, Form, Field, yupToFormErrors } from 'formik'
 import * as Yup from 'yup'
-import { addRoomRequest } from '../../api/AddRoomRequest';
+import { addRoom } from '../../api/RoomManagementRequest';
 
 function AddRoom() {
     return (
@@ -29,7 +29,7 @@ function AddRoom() {
 
                 onSubmit={(values, { setSubmitting, setStatus, resetForm }) => {
                     // console.log(values);
-                    addRoomRequest(values);
+                    addRoom(values);
                 }}
             >
                 {({ errors, touched, isSubmitting, status, setFieldValue }) => (

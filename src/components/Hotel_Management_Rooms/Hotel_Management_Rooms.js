@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './style.scss'
 import { Link, useParams } from 'react-router-dom'
 import RoomTR from './RoomTR'
-import { getRoomsByHotelId } from '../../api/GetRooms';
+import { getRoomsByHotelId, deleteRoom } from '../../api/RoomManagementRequest';
 
 function Hotel_Management_Rooms() {
 
@@ -24,6 +24,28 @@ function Hotel_Management_Rooms() {
 
         getData();
     }, [])
+
+    const getRooms = async () => {
+        try {
+            let response = await getRoomsByHotelId(hotelName);
+            setRooms(response.data)
+        } catch (err) {
+            // TODO if error
+        }
+    }
+
+    const deleteRoomAsync = async (roomId) => {
+        try {
+            let response = await deleteRoom(roomId);
+        } catch (err) {
+            // TODO if error
+        }
+    }
+
+    const handleDeleteRoom = async roomId => {
+        await deleteRoomAsync(roomId)
+        getRooms()
+    }
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value)
@@ -49,7 +71,7 @@ function Hotel_Management_Rooms() {
                 </thead>
                 <tbody>
                     {rooms?.map(room => {
-                        return <RoomTR key={room.roomId} roomm={room} />
+                        return <RoomTR key={room.roomId} roomm={room} onClick={handleDeleteRoom} />
                     })}
                 </tbody>
             </table>
