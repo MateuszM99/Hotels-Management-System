@@ -6,7 +6,10 @@ import {DateRangeInput, DateSingleInput, Datepicker} from '@datepicker-react/sty
 import Select from 'react-select'
 import Room_tr from './Room_tr'
 import { date } from 'yup/lib/locale'
-import {useHistory} from 'react-router-dom'
+import {useHistory,useParams} from 'react-router-dom'
+import { ThemeProvider } from "styled-components";
+import ReactBnbGallery from 'react-bnb-gallery';
+import 'react-bnb-gallery/dist/style.css'
 
 
 const initialState = {
@@ -29,6 +32,9 @@ const initialState = {
 
 function Hotel_Details() {
     
+    const PHOTOS = [];
+
+    const [isOpen, setIsOpen] = useState(false);
     const history = useHistory();
     const [hotel,setHotel] = useState(null);
     const [rooms,setRooms] = useState(null);
@@ -36,9 +42,9 @@ function Hotel_Details() {
     const [childrenCheck,setChildrenCheck] = useState(0);
     const [state, dispatch] = useReducer(reducer, initialState)
     const [minDate,setMinDate] = useState(new Date());
+    const {hotelName} = useParams(); // hotel id albo name
     
     useEffect(() => {
-        console.log(history.location.pathname.split("/").pop()) // daje nam id hotelu
         async function getData(){
             try{
                 let response = null // wasz request
@@ -78,19 +84,34 @@ function Hotel_Details() {
 
     console.log(minDate);
 
-    if(hotel == null){
+    /*if(hotel == null){
         return (
             <div>
                 Error
             </div>
         )
-    }
+    }*/
 
     return (
+        <ThemeProvider
+        theme={{
+        breakpoints: ["32em", "48em", "64em"],
+        reactDatepicker: {
+          daySize: [36, 40],
+          fontFamily: "system-ui, -apple-system",
+          colors: {
+            accessibility: "#131620",
+            selectedDay: " #131620",
+            selectedDayHover: "#131620",
+            primaryColor: "#131620"
+          }
+        }
+        }}
+        >
         <div className="hotel__details">
             <div className="hotel__details__main">
                 <div className="hotel__details__header">
-                    <h3>{hotel.name}</h3>
+                    <h3>hotel.name</h3>
                     <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
                     <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
                     <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
@@ -99,13 +120,13 @@ function Hotel_Details() {
                 </div>  
                 <div className="hotel__details__address">
                     <img src="https://img.icons8.com/material-sharp/24/000000/marker.png"></img>
-                    <p>{hotel.address}</p>
+                    <p>hotel.address</p>
                 </div>
                 <ImageGallery/>
             </div>
             <div className="hotel__details__description">
                 <div className="hotel__details__description__text">
-                <h3>{hotel.description}</h3>
+                <h3>hotel.description</h3>
                 </div>
                 <div className="hotel__details__description__reserve">
                     <img src="https://cf.bstatic.com/xdata/images/xphoto/max240x120/39352933.webp?k=bfaf8a27a70ea05bf329f8bc8d779fd981a068c7bd2edbab42e4bb89fe570ac8&o="></img>
@@ -145,17 +166,21 @@ function Hotel_Details() {
                 </div>
             </div>
             <div className="hotel__details__rooms__list">
-                {rooms == null ? 
+                {rooms != null ? 
                     <div>No rooms found</div> :
                     <table>
                         <thead>
                             <tr>
+                            <th>Images</th>
                             <th>For</th>
                             <th>Name</th>
                             <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                            <Room_tr/>
+                            <Room_tr/>
+                            <Room_tr/>
                             {rooms?.map(room => {
                                 <Room_tr key={room.id}/>
                             })}
@@ -164,6 +189,7 @@ function Hotel_Details() {
                 }
             </div>
         </div>
+        </ThemeProvider>
     );
 }
 

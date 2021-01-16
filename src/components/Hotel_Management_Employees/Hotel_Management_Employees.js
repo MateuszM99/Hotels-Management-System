@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import './style.scss'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import EmployeeTR from './EmployeeTR'
 import {getAllEmployees} from "../../api/EmployeesManagementRequests";
 
 function Hotel_Management_Employees() {
 
     const [employees,setEmployees] = useState(null);
-    
+    const [searchString,setSearchString] = useState('');
+
     useEffect(() => {
         async function getData(){
             try{
@@ -21,17 +22,13 @@ function Hotel_Management_Employees() {
     },[])
 
     const handleSearchChange = (e) => {
-        function setSearchString(value) {
-
-        }
-
         setSearchString(e.target.value)
     }
 
     return (
         <div className="cm__employees__container">
             <div className="cm__employees__container__filter">
-                <Link to={''}>Add employee</Link>
+                <Link to={`/management/hotelManage/${hotelName}/employees/addEmployee`}>Add employee</Link>
                 <label>Search : </label>
                 <input onChange={handleSearchChange}></input>
             </div>

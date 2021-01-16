@@ -1,8 +1,10 @@
 import React from 'react'
 import { Button } from '../Button/Buttons'
 import './style.scss'
+import {Link} from 'react-router-dom'
 
-function Hotel_Management_HotelCard() {
+function Hotel_Management_HotelCard(props) {
+
     return (
         <div className="hotel__management__hotel__card__main">
             <div>
@@ -28,7 +30,11 @@ function Hotel_Management_HotelCard() {
                 </div>
                 <a>Location name</a>
                 <span className="hotel__management__hotel__card__header__button">
-                    <Button>Manage</Button>
+                    <Link to={`/management/hotelManage/${props.hotelName}`}>
+                        <Button>
+                            Manage
+                        </Button>
+                    </Link>
                 </span>
             </div>
         </div>
