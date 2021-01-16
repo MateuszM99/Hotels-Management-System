@@ -1,15 +1,15 @@
 import React from 'react';
 import { Formik, Form, yupToFormErrors, Field } from 'formik';
 import * as Yup from 'yup';
-import { Link,Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './style.scss';
 import { loginRequest } from '../../api/SignInRequest';
 
 function SignIn() {
 
-    if(localStorage.getItem('userData') != null){
+    if (localStorage.getItem('userData') != null) {
         return (
-            <Redirect to="/"/>
+            <Redirect to="/" />
         )
     }
 
