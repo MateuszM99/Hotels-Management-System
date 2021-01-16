@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '../Button/Buttons'
 import ReactBnbGallery from 'react-bnb-gallery';
 import 'react-bnb-gallery/dist/style.css'
-import { getUrlsByRoomId, getPhotosByRoomId } from '../../api/PhotoManagementRequest';
+import { getUrlsByRoomId } from '../../api/PhotoManagementRequest';
 
 let images;
 

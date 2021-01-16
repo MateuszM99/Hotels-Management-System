@@ -11,7 +11,7 @@ import { ThemeProvider } from "styled-components";
 import ReactBnbGallery from 'react-bnb-gallery';
 import 'react-bnb-gallery/dist/style.css'
 import { getRoomsByHotelId } from '../../api/RoomManagementRequest';
-import { getPhotosByRoomId } from '../../api/PhotoManagementRequest';
+import { getHotel } from '../../api/HotelManagementRequest';
 
 
 const initialState = {
@@ -50,9 +50,8 @@ function Hotel_Details() {
     useEffect(() => {
         async function getData() {
             try {
-                // let response = null // wasz request
-                // console.log(response.data);
-                // setHotel(response.data);
+                let hotelResponse = await getHotel(hotelName);
+                setHotel(hotelResponse.data);
 
                 let roomResponse = await getRoomsByHotelId(hotelName);
                 setRooms(roomResponse.data);
@@ -62,24 +61,6 @@ function Hotel_Details() {
         }
         getData();
     }, [])
-
-    // async function getData() {
-    //     try {
-    //         console.log("Request")
-    //         let response = await getRoomsByHotelId(hotelName);
-    //         setRooms(response.data);
-    //         setLoading(false);
-    //     } catch (err) {
-    //         // TODO if error
-    //     }
-    // }
-
-    // useEffect(() => {
-
-
-    //     getData();
-    // }, [])
-
 
     const handleAvailibilityAdults = (e) => {
         setAdultsCheck(e.target.value);
@@ -104,8 +85,6 @@ function Hotel_Details() {
             // TODO if error
         }
     }
-
-    // console.log(minDate);
 
     /*if(hotel == null){
         return (
@@ -134,7 +113,7 @@ function Hotel_Details() {
             <div className="hotel__details">
                 <div className="hotel__details__main">
                     <div className="hotel__details__header">
-                        <h3>hotel.name</h3>
+                        <h3>Hotel {hotel.hotelId}</h3>
                         <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
                         <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
                         <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
@@ -143,13 +122,14 @@ function Hotel_Details() {
                     </div>
                     <div className="hotel__details__address">
                         <img src="https://img.icons8.com/material-sharp/24/000000/marker.png"></img>
-                        <p>hotel.address</p>
+                        <p>{hotel.address}</p>
                     </div>
                     <ImageGallery />
                 </div>
                 <div className="hotel__details__description">
                     <div className="hotel__details__description__text">
-                        <h3>hotel.description</h3>
+                        <h3>Number of rooms: {hotel.numberOfRooms}</h3>
+                        <h3>Number of stars: {hotel.numberOfStars}</h3>
                     </div>
                     <div className="hotel__details__description__reserve">
                         <img src="https://cf.bstatic.com/xdata/images/xphoto/max240x120/39352933.webp?k=bfaf8a27a70ea05bf329f8bc8d779fd981a068c7bd2edbab42e4bb89fe570ac8&o="></img>
