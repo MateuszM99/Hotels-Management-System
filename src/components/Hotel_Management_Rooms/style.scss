@@ -4,9 +4,10 @@ $base-color: #14171f;
 .cm__rooms__container{
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 100%;
     margin: 25px;
     margin-top: 75px;
+    align-items: center;
 
     table {
         display: grid;
@@ -19,9 +20,6 @@ $base-color: #14171f;
           minmax(150px, 1.67fr)
           minmax(150px, 1.67fr)
           minmax(150px, 1.67fr)
-          minmax(150px, 1fr)
-          minmax(150px, 1.67fr)
-          minmax(300px, 3.33fr);
       }
 
         thead {

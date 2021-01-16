@@ -1,27 +1,29 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
-import {Link, useParams} from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import RoomTR from './RoomTR'
+import { getRoomsByHotelId } from '../../api/GetRooms';
 
 function Hotel_Management_Rooms() {
 
-    const {hotelName} = useParams();
-    const [rooms,setRooms] = useState(null);
-    const [searchString,setSearchString] = useState('');
-    
-    useEffect(() => {
-        async function getData(){
-            try{
-                let response = null //request wasz
-                console.log(response.data);
-                setRooms(response.data); 
-            } catch(err) {
-                // TODO if error
-            }
+    const { hotelName } = useParams();
+    const [rooms, setRooms] = useState(null);
+    const [searchString, setSearchString] = useState('');
+
+    async function getData() {
+        try {
+            let response = await getRoomsByHotelId(hotelName);
+            setRooms(response.data);
+        } catch (err) {
+            // TODO if error
         }
-        
+    }
+
+    useEffect(() => {
+
+
         getData();
-    },[])
+    }, [])
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value)
@@ -37,24 +39,21 @@ function Hotel_Management_Rooms() {
             <table>
                 <thead>
                     <tr>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
+                        <th>Hotel id</th>
+                        <th>Room id</th>
+                        <th>Price</th>
+                        <th>Persons</th>
+                        <th>Description</th>
+                        <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
                     {rooms?.map(room => {
-                        <RoomTR key={room.id}/>
+                        return <RoomTR key={room.roomId} roomm={room} />
                     })}
                 </tbody>
             </table>
-        </div>   
+        </div>
     )
 }
 
