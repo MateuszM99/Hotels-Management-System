@@ -7,6 +7,7 @@ import './style.scss'
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import DescriptionIcon from '@material-ui/icons/Description';
+import jwt_decode from "jwt-decode";
 
 function Header() {
 
@@ -18,6 +19,7 @@ function Header() {
         if (localStorage.getItem('jwtToken') != null) {
             setIsSignedIn(true);
             const token = localStorage.getItem('jwtToken');
+            username = jwt_decode(token).sub
         }
     }, [])
 
@@ -55,7 +57,7 @@ function Header() {
                 <div className="main__header__signedIn" style={isSignedIn ? { display: 'flex' } : { display: 'none' }}>
                     <span>
                         <PersonIcon />
-                        <p>Username</p>
+                        <p>{username}</p>
                     </span>
                     <span>
                         <ExitToAppIcon />

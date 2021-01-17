@@ -10,6 +10,7 @@ import AddRoom from '../Hotel_Management_Rooms/AddRoom'
 import Hotel_Management_Reservations from '../Hotel_Management_Reservations/Hotel_Management_Reservations'
 import Hotel_Management_Schedules from '../Hotel_Management_Schedules/Hotel_Management_Schedules'
 import AddSchedule from '../Hotel_Management_Schedules/AddSchedule'
+import AdminRoute from '../../AdminRoute'
 
 function Hotel_Management() {
     return (
@@ -21,21 +22,13 @@ function Hotel_Management() {
             <Route path="/management/hotelManage/:hotelName">
                 <div style={{display: 'flex'}}>
                     <Hotel_Management_Navbar/>
-                    <Route exact path="/management/hotelManage/:hotelName/rooms">
-                        <Hotel_Management_Rooms/>
-                    </Route>
-                    <Route path="/management/hotelManage/:hotelName/rooms/addRoom">
-                        <AddRoom/>
-                    </Route>
+                    <AdminRoute exact path="/management/hotelManage/:hotelName/rooms" component={Hotel_Management_Rooms}/>
+                    <AdminRoute path="/management/hotelManage/:hotelName/rooms/addRoom" component={AddRoom}/>               
                     <Route path="/management/hotelManage/:hotelName/reservations">
                         <Hotel_Management_Reservations/>
                     </Route>
-                    <Route exact path="/management/hotelManage/:hotelName/employees">
-                        <Hotel_Management_Employees/>             
-                    </Route>
-                    <Route exact path="/management/hotelManage/:hotelName/employees/addEmployee">
-                        <AddEmployee/>        
-                    </Route>
+                    <AdminRoute exact path="/management/hotelManage/:hotelName/employees" component={Hotel_Management_Employees}/>         
+                    <AdminRoute exact path="/management/hotelManage/:hotelName/employees/addEmployee" component={AddEmployee}/>                    
                     <Route exact path="/management/hotelManage/:hotelName/schedules">
                         <Hotel_Management_Schedules/>
                     </Route>

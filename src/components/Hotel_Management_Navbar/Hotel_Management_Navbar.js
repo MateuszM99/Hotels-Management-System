@@ -15,6 +15,15 @@ function Hotel_Management_Navbar(props) {
     const [isAdmin,setIsAdmin] = useState(false);
     // console.log(hotelName);
 
+    useEffect(() => {
+        if (localStorage.getItem('jwtToken') != null) {
+            const token = localStorage.getItem('jwtToken');
+            if(jwt_decode(token).role == 'ADMIN'){
+                setIsAdmin(true);
+            }
+        }
+    }, [])
+
     return (
         <div className="hotel__management__navbar">
             <nav className="hotel__management__navbar__nav">

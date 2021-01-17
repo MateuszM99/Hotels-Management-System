@@ -5,7 +5,7 @@ import jwt_decode from "jwt-decode";
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   useEffect(() => {
-    let user = JSON.parse(localStorage.getItem('jwtToken'));
+    let user = localStorage.getItem('jwtToken');
         if(user != null){
             let token = user.token;
             let tokenExpiration = jwt_decode(token).exp;
@@ -28,7 +28,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   }
   return (
     <Route {...rest} render={props =>
-      isAuthenticated  ? (
+      !isAuthenticated  ? (
         <Redirect to='/signIn'/>
       ) : (
         <Component {...props} />

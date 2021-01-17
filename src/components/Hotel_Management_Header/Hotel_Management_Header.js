@@ -8,7 +8,16 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Hotel_Management_Header() {
 
+    let username = "";
     const history = useHistory();
+
+    useEffect(() => {
+        if (localStorage.getItem('jwtToken') != null) {
+            setIsSignedIn(true);
+            const token = localStorage.getItem('jwtToken');
+            username = jwt_decode(token).sub
+        }
+    }, [])
 
     return (
         <div className="hotel__management__header">
@@ -26,7 +35,7 @@ function Hotel_Management_Header() {
                 <div className="hotel__management__header__signedIn">
                     <span>
                         <PersonIcon />
-                        <p>Username</p>
+                        <p>{username}</p>
                     </span>
                     <span>
                         <ExitToAppIcon />

@@ -12,6 +12,7 @@ import Hotel_Management from './components/Hotel_Management/Hotel_Management';
 import Room_Reservation_Form from './components/Room_Reservation_Form/Room_Reservation_Form';
 import Reservations from './components/Reservations/Reservations';
 import PrivateRoute from './PrivateRoute';
+import EmployeeRoute from './EmployeeRoute';
 import axios from 'axios';
 
 function App() {
@@ -52,7 +53,7 @@ function App() {
               <Search/>
               <Room_Reservation_Form/>
           </Route>
-          <PrivateRoute path="/management" component={Hotel_Management}/>
+          <EmployeeRoute path="/management" component={Hotel_Management}/>
           <PrivateRoute path="/:username/reservations" component={Reservations}/>
           <Route path="/">
             <Header/>

@@ -5,13 +5,14 @@ import jwt_decode from "jwt-decode";
 const AdminRoute = ({ component: Component, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   useEffect(() => {
-    let user = JSON.parse(localStorage.getItem('jwtToken'));
+    let user = localStorage.getItem('jwtToken');
         if(user != null){
             let token = user.token;
             let tokenExpiration = jwt_decode(token).exp;
+            let tokenRole = jwt_decode(token).role;
             let dateNow = new Date();
 
-            if(tokenExpiration < dateNow.getTime()/1000){
+            if(tokenExpiration < dateNow.getTime()/1000 && tokenRole != 'ADMIN'){
               setIsAuthenticated(false)
             } else {
               setIsAuthenticated(true);
@@ -28,7 +29,7 @@ const AdminRoute = ({ component: Component, ...rest }) => {
   }
   return (
     <Route {...rest} render={props =>
-      isAuthenticated  ? (
+      !isAuthenticated  ? (
         <Redirect to='/signIn'/>
       ) : (
         <Component {...props} />
