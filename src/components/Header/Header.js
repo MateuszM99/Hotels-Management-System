@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '../Button/Buttons'
 import SignInButton from '../Button/SignInButton'
@@ -9,48 +9,51 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Header() {
 
-    const [isSignedIn,setIsSignedIn] = useState(false);
+    const [isSignedIn, setIsSignedIn] = useState(false);
 
     useEffect(() => {
-        if(localStorage.getItem('jwtToken') != null){
+        if (localStorage.getItem('jwtToken') != null) {
             setIsSignedIn(true);
         }
     }, [])
 
     return (
-        <header style={{display:'flex',width:'100%'}}>
+        <header style={{ display: 'flex', width: '100%' }}>
             <div className="main__header">
                 <nav className="main__header__nav">
                     <ul>
                         <li>
-                        <Link to=''>
-                            <span>
-                            <img src="https://img.icons8.com/fluent-systems-filled/24/ffffff/home.png"/>
-                            <p>Home</p>
-                            </span>
-                        </Link>
+                            <Link to=''>
+                                <span>
+                                    <img src="https://img.icons8.com/fluent-systems-filled/24/ffffff/home.png" />
+                                    <p>Home</p>
+                                </span>
+                            </Link>
                         </li>
-                        <li style={isSignedIn ? {display : 'flex'} : {display: 'none'}}>
+                        <li style={isSignedIn ? { display: 'flex' } : { display: 'none' }}>
                             <Link to='/management/hotels'>
                                 <span>
-                                <img src="https://img.icons8.com/material/24/ffffff/hotel-information.png"/>
-                                <p>Hotels</p>
+                                    <img src="https://img.icons8.com/material/24/ffffff/hotel-information.png" />
+                                    <p>Hotels</p>
                                 </span>
                             </Link>
                         </li>
                     </ul>
                 </nav>
-                <div className="main__header__signedIn" style={isSignedIn ? {display : 'flex'} : {display: 'none'}}>
+                <div className="main__header__signedIn" style={isSignedIn ? { display: 'flex' } : { display: 'none' }}>
                     <span>
-                        <PersonIcon/>
+                        <PersonIcon />
                         <p>Username</p>
                     </span>
                     <span>
-                        <ExitToAppIcon/>
-                        <a>Sign out</a>
+                        <ExitToAppIcon />
+                        <a onClick={() => {
+                            localStorage.removeItem("jwtToken")
+                            window.location.reload(false)
+                        }}>Sign out</a>
                     </span>
                 </div>
-                <div className="main__header__buttons" style={isSignedIn ? {display : 'none'} : {display: 'flex'}}>
+                <div className="main__header__buttons" style={isSignedIn ? { display: 'none' } : { display: 'flex' }}>
                     <Link to='/signIn'>
                         <Button height="40px">
                             Sign In
@@ -61,7 +64,7 @@ function Header() {
                             Sign Up
                         </Button>
                     </Link>
-                </div>    
+                </div>
             </div>
         </header>
     )

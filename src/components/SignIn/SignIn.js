@@ -7,7 +7,7 @@ import { loginRequest } from '../../api/SignInRequest';
 
 function SignIn() {
 
-    if (localStorage.getItem('userData') != null) {
+    if (localStorage.getItem('jwtToken') != null) {
         return (
             <Redirect to="/" />
         )

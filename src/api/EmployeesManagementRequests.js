@@ -3,11 +3,12 @@ import axios from 'axios'
 const baseUrl = 'http://localhost:8080/';
 
 export function getAllEmployees(jwtToken) {
-    return axios.get(`${baseUrl}admin/employees`, {headers: {'Authorization': "Bearer " + jwtToken}});
+    return axios.get(`${baseUrl}admin/employees`, { headers: { 'Authorization': "Bearer " + jwtToken } });
+
 }
 
 export function deleteEmployee(employeeId, jwtToken) {
-    return axios.delete(`${baseUrl}admin/employees/` + employeeId, {headers: {'Authorization': "Bearer " + jwtToken}});
+    return axios.delete(`${baseUrl}admin/employees/` + employeeId, { headers: { 'Authorization': "Bearer " + jwtToken } });
 }
 
 export function addEmployee(registerData, jwtToken) {
@@ -22,15 +23,15 @@ export function addEmployee(registerData, jwtToken) {
         "position": registerData.position,
         "salary": registerData.salary
     };
-    return axios.post(`${baseUrl}admin/employees/`, registerEmployeeBody, {headers: {'Authorization': "Bearer " + jwtToken}});
+    return axios.post(`${baseUrl}admin/employees/`, registerEmployeeBody, { headers: { 'Authorization': "Bearer " + jwtToken } });
 }
 
 export function getCurrentSchedules(jwtToken) {
-    return axios.get(`${baseUrl}admin/employees/schedules/current`, {headers: {'Authorization': "Bearer " + jwtToken}});
+    return axios.get(`${baseUrl}admin/employees/schedules/current`, { headers: { 'Authorization': "Bearer " + jwtToken } });
 }
 
 export function deleteSchedule(scheduleId, jwtToken) {
-    return axios.delete(`${baseUrl}admin/employees/schedules/` + scheduleId, {headers: {'Authorization': "Bearer " + jwtToken}});
+    return axios.delete(`${baseUrl}admin/employees/schedules/` + scheduleId, { headers: { 'Authorization': "Bearer " + jwtToken } });
 }
 
 export function createSchedule(scheduleData, jwtToken) {
@@ -41,5 +42,5 @@ export function createSchedule(scheduleData, jwtToken) {
             "endDate": scheduleData.date + 'T' + scheduleData.endHour
         }
     }
-    return axios.post(`${baseUrl}admin/employees/schedules`, body, {headers: {'Authorization': "Bearer " + jwtToken}});
+    return axios.post(`${baseUrl}admin/employees/schedules`, body, { headers: { 'Authorization': "Bearer " + jwtToken } });
 }
