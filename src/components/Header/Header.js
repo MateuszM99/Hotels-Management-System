@@ -15,11 +15,17 @@ function Header() {
     const history = useHistory();
     const [isSignedIn, setIsSignedIn] = useState(false);
 
+    if(localStorage.getItem('jwtToken') != null) {
+        const token = localStorage.getItem('jwtToken');
+        username = jwt_decode(token).sub
+        console.log(jwt_decode(token).sub)
+    }
     useEffect(() => {
         if (localStorage.getItem('jwtToken') != null) {
             setIsSignedIn(true);
             const token = localStorage.getItem('jwtToken');
             username = jwt_decode(token).sub
+            console.log(jwt_decode(token).sub)
         }
     }, [])
 
@@ -64,6 +70,7 @@ function Header() {
                         <a onClick={() => {
                             localStorage.removeItem("jwtToken")
                             history.push('/');
+                            window.location.reload(false)
                         }}>Sign out</a>
                     </span>
                 </div>

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './style.scss'
 import HotelIcon from '@material-ui/icons/Hotel';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
@@ -6,6 +6,7 @@ import EventNoteIcon from '@material-ui/icons/EventNote';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import { Link, useHistory, useParams } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
 
 
 function Hotel_Management_Navbar(props) {
@@ -18,7 +19,7 @@ function Hotel_Management_Navbar(props) {
     useEffect(() => {
         if (localStorage.getItem('jwtToken') != null) {
             const token = localStorage.getItem('jwtToken');
-            if(jwt_decode(token).role == 'ADMIN'){
+            if(jwt_decode(token).role === 'ADMIN'){
                 setIsAdmin(true);
             }
         }

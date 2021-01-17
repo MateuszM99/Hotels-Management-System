@@ -185,7 +185,7 @@ function Hotel_Details() {
                         </thead>
                         <tbody>
                             {rooms?.map(room => {
-                                return <Room_tr key={room.id} rm={room} />
+                                return <Room_tr key={room.roomId} rm={room} />
                             })}
                         </tbody>
                     </table>

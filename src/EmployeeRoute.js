@@ -5,14 +5,13 @@ import jwt_decode from "jwt-decode";
 const EmployeeRoute = ({ component: Component, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   useEffect(() => {
-    let user = localStorage.getItem('jwtToken');
-        if(user != null){
-            let token = user.token;
+    let token = localStorage.getItem('jwtToken');
+        if(token != null){
             let tokenExpiration = jwt_decode(token).exp;
             let tokenRole = jwt_decode(token).role;
             let dateNow = new Date();
 
-            if(tokenExpiration < dateNow.getTime()/1000 && tokenRole != 'ADMIN' || tokenRole != 'EMPLOYEE'){
+            if(tokenExpiration < dateNow.getTime()/1000 || (tokenRole !== 'ADMIN' && tokenRole !== 'EMPLOYEE')){
               setIsAuthenticated(false)
             } else {
               setIsAuthenticated(true);

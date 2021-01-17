@@ -5,10 +5,15 @@ import jwt_decode from "jwt-decode";
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   useEffect(() => {
-    let user = localStorage.getItem('jwtToken');
-        if(user != null){
-            let token = user.token;
-            let tokenExpiration = jwt_decode(token).exp;
+    let token = localStorage.getItem('jwtToken');
+        if(token != null){
+            let tokenExpiration
+            try {
+                console.log(jwt_decode(token))
+                tokenExpiration = jwt_decode(token).exp;
+            } catch (Err) {
+                console.log('sadasd')
+            }
             let dateNow = new Date();
 
             if(tokenExpiration < dateNow.getTime()/1000){

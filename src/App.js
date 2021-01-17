@@ -41,7 +41,7 @@ function App() {
           <Route path="/signUp">
             <SignUp/>
           </Route>
-          <Route path="/hotel/:hotelName">
+          <Route exact path="/hotel/:hotelName">
             <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
               <Header/>
               <Search/>
