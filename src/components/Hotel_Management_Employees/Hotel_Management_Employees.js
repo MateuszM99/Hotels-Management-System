@@ -1,31 +1,45 @@
-import React,{useEffect,useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './style.scss'
 import {Link, useParams} from 'react-router-dom'
 import EmployeeTR from './EmployeeTR'
+import {deleteEmployee, getAllEmployees} from "../../api/EmployeesManagementRequests";
 
 function Hotel_Management_Employees() {
 
     const {hotelName} = useParams();
-    const [employees,setEmployees] = useState(null);
-    const [searchString,setSearchString] = useState('');
-    
-    console.log(hotelName);
+    const [employees, setEmployees] = useState(null);
+    const [searchString, setSearchString] = useState('');
+
     useEffect(() => {
-        async function getData(){
-            try{
-                let response = null //request wasz
-                console.log(response.data);
-                setEmployees(response.data); 
-            } catch(err) {
-                // TODO if error
-            }
+        if(employees == null) {
+            getEmployees();
         }
-        
-        getData();
-    },[])
+    }, [employees])
+
+    const getEmployees = async () => {
+        try {
+            let response = await getAllEmployees(localStorage.getItem("jwtToken")); //request wasz
+            setEmployees(response.data)
+        } catch (err) {
+            // TODO if error
+        }
+    }
+
+    const deleteEmployeeAsync = async (employeeId) => {
+        try {
+            let response = await deleteEmployee(employeeId, localStorage.getItem("jwtToken"));
+        } catch (err) {
+            // TODO if error
+        }
+    }
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value)
+    }
+
+    const handleDeleteEmployee = async employeeId => {
+        await deleteEmployeeAsync(employeeId)
+        getEmployees()
     }
 
     return (
@@ -37,22 +51,20 @@ function Hotel_Management_Employees() {
             </div>
             <table>
                 <thead>
-                    <tr>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Phone number</th>
+                    <th>Birthdate</th>
+                    <th>Position</th>
+                    <th>Salary</th>
+                    <th>Manage</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {employees?.map(employee => {
-                        <EmployeeTR key={employee.id}/>
-                    })}
+                {employees?.map(employee => <EmployeeTR key={employee.id} employee={employee} onClick={handleDeleteEmployee}/>)}
                 </tbody>
             </table>
         </div>
