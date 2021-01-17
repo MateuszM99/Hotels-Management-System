@@ -49,15 +49,19 @@ function Hotel_Details() {
 
     useEffect(() => {
         async function getData() {
+
+
+
             try {
                 let hotelResponse = await getHotel(hotelName);
+                // console.log(hotelResponse);
                 setHotel(hotelResponse.data);
-
                 let roomResponse = await getRoomsByHotelId(hotelName);
                 setRooms(roomResponse.data);
             } catch (err) {
                 // TODO if error
             }
+
         }
         getData();
     }, [])
@@ -86,13 +90,13 @@ function Hotel_Details() {
         }
     }
 
-    /*if(hotel == null){
+    if (hotel == null) {
         return (
             <div>
                 Error
             </div>
         )
-    }*/
+    }
 
     return (
         <ThemeProvider
@@ -113,7 +117,7 @@ function Hotel_Details() {
             <div className="hotel__details">
                 <div className="hotel__details__main">
                     <div className="hotel__details__header">
-                        <h3>Hotel {hotel.hotelId}</h3>
+                        <h3>Hotel {hotelName}</h3>
                         <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
                         <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
                         <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
@@ -129,7 +133,7 @@ function Hotel_Details() {
                 <div className="hotel__details__description">
                     <div className="hotel__details__description__text">
                         <h3>Number of rooms: {hotel.numberOfRooms}</h3>
-                        <h3>Number of stars: {hotel.numberOfStars}</h3>
+                        <h3>Number of stars: {hotel.numberOfStars} </h3>
                     </div>
                     <div className="hotel__details__description__reserve">
                         <img src="https://cf.bstatic.com/xdata/images/xphoto/max240x120/39352933.webp?k=bfaf8a27a70ea05bf329f8bc8d779fd981a068c7bd2edbab42e4bb89fe570ac8&o="></img>
