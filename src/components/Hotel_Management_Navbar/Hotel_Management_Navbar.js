@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './style.scss'
 import HotelIcon from '@material-ui/icons/Hotel';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
@@ -12,14 +12,14 @@ function Hotel_Management_Navbar(props) {
 
     const history = useHistory();
     const { hotelName } = useParams();
-
+    const [isAdmin,setIsAdmin] = useState(false);
     // console.log(hotelName);
 
     return (
         <div className="hotel__management__navbar">
             <nav className="hotel__management__navbar__nav">
                 <ul className="hotel__management__navbar__nav__list">
-                    <Link to={`/management/hotelManage/${hotelName}/rooms`}>
+                    <Link to={`/management/hotelManage/${hotelName}/rooms`} style={isAdmin ? {display:'block'} : {display : 'none'}}>
                         <li>
                             <HotelIcon style={{ marginLeft: '15px' }} />
                             <p>Rooms manage</p>
@@ -31,7 +31,7 @@ function Hotel_Management_Navbar(props) {
                             <p>Reservation manage</p>
                         </li>
                     </Link>
-                    <Link to={`/management/hotelManage/${hotelName}/employees`}>
+                    <Link to={`/management/hotelManage/${hotelName}/employees`} style={isAdmin ? {display:'block'} : {display : 'none'}}>
                         <li>
                             <PeopleAltIcon style={{ marginLeft: '15px' }} />
                             <p>Employees manage</p>
