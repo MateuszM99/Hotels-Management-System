@@ -1,12 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import './style.scss'
 import {Link, useParams} from 'react-router-dom'
 import UserReservationTR from './UserReservationTR'
+import {getAllHotels} from "../../api/HotelManagementRequest";
+import {getReservations} from "../../api/ReservationManagementRequest";
 
 function User_Hotel_Reservations() {
 
-    const [reservations,setReservations] = useState(null);
+    const [reservations, setReservations] = useState(null);
     const [searchString, setSearchString] = useState('');
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                let response = await getReservations();
+                console.log(response.data);
+                setReservations(response.data);
+            } catch (err) {
+                // TODO if error
+            }
+        }
+
+        getData();
+    }, [])
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value)
@@ -14,24 +30,20 @@ function User_Hotel_Reservations() {
 
     return (
         <div className="cm__reservations__container">
-            <div className="cm__reservations__container__filter">
-                <label>Search : </label>
-                <input onChange={handleSearchChange}></input>
-            </div>
+            {/*<div className="cm__reservations__container__filter">*/}
+            {/*    <label>Search : </label>*/}
+            {/*    <input onChange={handleSearchChange}></input>*/}
+            {/*</div>*/}
             <table>
                 <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Email</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Phone number</th>
-                    <th>Birthdate</th>
-                    <th>Position</th>
+                    <th>Room Id</th>
+                    <th>Start date</th>
+                    <th>End Date</th>
                 </tr>
                 </thead>
                 <tbody>
-                {reservations?.map(reservation => <UserReservationTR/>)}
+                {reservations?.map(reservation => <UserReservationTR key={reservations.id} res={reservation}/>)}
                 </tbody>
             </table>
         </div>

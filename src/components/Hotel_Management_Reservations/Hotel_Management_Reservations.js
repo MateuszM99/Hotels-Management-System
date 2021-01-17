@@ -1,26 +1,27 @@
-import React,{useEffect,useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './style.scss'
 import {Link} from 'react-router-dom'
 import ReservationTR from './ReservationTR'
+import {getAllReservations} from "../../api/ReservationManagementRequest";
 
 function Hotel_Management_Reservations() {
 
-    const [reservations,setReservations] = useState(null);
-    const [searchString,setSearchString] = useState('');
-    
+    const [reservations, setReservations] = useState(null);
+    const [searchString, setSearchString] = useState('');
+
     useEffect(() => {
-        async function getData(){
-            try{
-                let response = null //request wasz
+        async function getData() {
+            try {
+                let response = await getAllReservations()
                 console.log(response.data);
-                setReservations(response.data); 
-            } catch(err) {
+                setReservations(response.data);
+            } catch (err) {
                 // TODO if error
             }
         }
-        
+
         getData();
-    },[])
+    }, [])
 
     const handleSearchChange = (e) => {
         setSearchString(e.target.value)
@@ -34,22 +35,18 @@ function Hotel_Management_Reservations() {
             </div>
             <table>
                 <thead>
-                    <tr>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    <th>Placeholder</th>
-                    </tr>
+                <tr>
+                    <th>Room id</th>
+                    <th>Email</th>
+                    <th>Start date</th>
+                    <th>End Date</th>
+                    <th>Options</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {reservations?.map(employee => {
-                        <ReservationTR key={employee.id}/>
-                    })}
+                {reservations?.map(reservation => {
+                    return <ReservationTR key={reservation.id} res={reservation}/>
+                })}
                 </tbody>
             </table>
         </div>

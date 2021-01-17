@@ -14,3 +14,11 @@ export function createReservation(interval, roomId) {
     }
     return axios.post(`${baseUrl}reservations`, body, {headers: {'Authorization': "Bearer " + localStorage.getItem("jwtToken")}});
 }
+
+export function getReservations() {
+    return axios.get(`${baseUrl}reservations`, {headers: {'Authorization': "Bearer " + localStorage.getItem("jwtToken")}});
+}
+
+export function getAllReservations() {
+    return axios.get(`${baseUrl}admin/reservations`, {headers: {'Authorization': "Bearer " + localStorage.getItem("jwtToken")}});
+}
