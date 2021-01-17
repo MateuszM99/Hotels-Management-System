@@ -1,11 +1,13 @@
 import React from 'react';
 import { Formik, Form, yupToFormErrors, Field } from 'formik';
 import * as Yup from 'yup';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import './style.scss';
 import { loginRequest } from '../../api/SignInRequest';
 
 function SignIn() {
+
+    const history = useHistory();
 
     if (localStorage.getItem('jwtToken') != null) {
         return (
@@ -28,9 +30,15 @@ function SignIn() {
                 })}
 
                 onSubmit={(values) => {
+                    try {
                     loginRequest("Basic " + btoa(values.username + ":" + values.password)).then(response => {
                         localStorage.setItem("jwtToken", response.data)
+                        history.push("/");
                     })
+                    } 
+                    catch(err){
+
+                    }
                 }}
             >
                 {({ errors, touched, isSubmitting, status }) => (

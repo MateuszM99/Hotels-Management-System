@@ -2,8 +2,13 @@ import React from 'react'
 import { Formik, Form, Field, yupToFormErrors } from 'formik'
 import * as Yup from 'yup'
 import { addEmployee } from "../../api/EmployeesManagementRequests";
+import { useHistory,useParams } from 'react-router-dom';
 
 function AddEmployee() {
+
+    const {hotelName} = useParams();
+    const history = useHistory();
+
     return (
         <div className="cm__employees__create__container">
             <Formik
@@ -30,7 +35,11 @@ function AddEmployee() {
                 })}
 
                 onSubmit={(values, { setSubmitting, setStatus, resetForm }) => {
-                    addEmployee(values, localStorage.getItem('jwtToken')).then(r => setStatus({ message: r.data.message }))
+                    addEmployee(values, localStorage.getItem('jwtToken'))
+                    .then(r => 
+                        setStatus({ message: r.data.message }),
+                        history.push(`/management/hotelManage/${hotelName}/employees`)
+                        )
                     setStatus("Siema")
                 }}
             >

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import { Button } from '../Button/Buttons'
 import ReactBnbGallery from 'react-bnb-gallery';
 import 'react-bnb-gallery/dist/style.css'
@@ -18,6 +18,7 @@ async function getPhotos(roomId) {
 }
 
 function Room_tr(props) {
+    const {hotelName} = useParams();
     getPhotos(props.rm.roomId);
 
     const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,7 @@ function Room_tr(props) {
             <td>{props.rm.description}</td>
             <td>
                 <div>
-                    <Button>Reserve</Button>
+                    <Link to={`/hotel/${hotelName}/reserve/${props.rm.roomId}`}>Reserve</Link>
                 </div>
             </td>
         </tr>

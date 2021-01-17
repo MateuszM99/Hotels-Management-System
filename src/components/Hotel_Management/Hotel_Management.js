@@ -11,11 +11,12 @@ import Hotel_Management_Reservations from '../Hotel_Management_Reservations/Hote
 import Hotel_Management_Schedules from '../Hotel_Management_Schedules/Hotel_Management_Schedules'
 import AddSchedule from '../Hotel_Management_Schedules/AddSchedule'
 import AddHotel from '../Hotel_Management_Hotels/AddHotel'
+import AdminRoute from '../../AdminRoute'
 
 function Hotel_Management() {
     return (
         <div>
-            <Hotel_Management_Header />
+            <Hotel_Management_Header/>
             <Route exact path="/management/hotels">
                 <Hotel_Management_Hotels />
             </Route>
@@ -23,28 +24,20 @@ function Hotel_Management() {
                 <AddHotel />
             </Route>
             <Route path="/management/hotelManage/:hotelName">
-                <div style={{ display: 'flex' }}>
-                    <Hotel_Management_Navbar />
-                    <Route exact path="/management/hotelManage/:hotelName/rooms">
-                        <Hotel_Management_Rooms />
-                    </Route>
-                    <Route path="/management/hotelManage/:hotelName/rooms/addRoom">
-                        <AddRoom />
-                    </Route>
+                <div style={{display: 'flex'}}>
+                    <Hotel_Management_Navbar/>
+                    <AdminRoute exact path="/management/hotelManage/:hotelName/rooms" component={Hotel_Management_Rooms}/>
+                    <AdminRoute path="/management/hotelManage/:hotelName/rooms/addRoom" component={AddRoom}/>
                     <Route path="/management/hotelManage/:hotelName/reservations">
-                        <Hotel_Management_Reservations />
+                        <Hotel_Management_Reservations/>
                     </Route>
-                    <Route exact path="/management/hotelManage/:hotelName/employees">
-                        <Hotel_Management_Employees />
-                    </Route>
-                    <Route exact path="/management/hotelManage/:hotelName/employees/addEmployee">
-                        <AddEmployee />
-                    </Route>
+                    <AdminRoute exact path="/management/hotelManage/:hotelName/employees" component={Hotel_Management_Employees}/>
+                    <AdminRoute exact path="/management/hotelManage/:hotelName/employees/addEmployee" component={AddEmployee}/>
                     <Route exact path="/management/hotelManage/:hotelName/schedules">
-                        <Hotel_Management_Schedules />
+                        <Hotel_Management_Schedules/>
                     </Route>
                     <Route exact path="/management/hotelManage/:hotelName/schedules/addSchedule">
-                        <AddSchedule />
+                        <AddSchedule/>
                     </Route>
                 </div>
             </Route>

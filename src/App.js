@@ -10,7 +10,9 @@ import Search from './components/Search/Search'
 import Hotel_Details from './components/Hotel_Details/Hotel_Details'
 import Hotel_Management from './components/Hotel_Management/Hotel_Management';
 import Room_Reservation_Form from './components/Room_Reservation_Form/Room_Reservation_Form';
+import Reservations from './components/Reservations/Reservations';
 import PrivateRoute from './PrivateRoute';
+import EmployeeRoute from './EmployeeRoute';
 import axios from 'axios';
 
 function App() {
@@ -39,7 +41,7 @@ function App() {
           <Route path="/signUp">
             <SignUp/>
           </Route>
-          <Route path="/hotel/:hotelName">
+          <Route exact path="/hotel/:hotelName">
             <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
               <Header/>
               <Search/>
@@ -51,7 +53,8 @@ function App() {
               <Search/>
               <Room_Reservation_Form/>
           </Route>
-          <PrivateRoute path="/management" component={Hotel_Management}/>
+          <EmployeeRoute path="/management" component={Hotel_Management}/>
+          <PrivateRoute path="/:username/reservations" component={Reservations}/>
           <Route path="/">
             <Header/>
             <Search/>

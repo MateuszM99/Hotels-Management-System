@@ -2,21 +2,16 @@ import React, { useEffect, useState} from 'react';
 import { Route, Redirect } from 'react-router-dom'
 import jwt_decode from "jwt-decode";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const EmployeeRoute = ({ component: Component, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   useEffect(() => {
     let token = localStorage.getItem('jwtToken');
         if(token != null){
-            let tokenExpiration
-            try {
-                console.log(jwt_decode(token))
-                tokenExpiration = jwt_decode(token).exp;
-            } catch (Err) {
-                console.log('sadasd')
-            }
+            let tokenExpiration = jwt_decode(token).exp;
+            let tokenRole = jwt_decode(token).role;
             let dateNow = new Date();
 
-            if(tokenExpiration < dateNow.getTime()/1000){
+            if(tokenExpiration < dateNow.getTime()/1000 || (tokenRole !== 'ADMIN' && tokenRole !== 'EMPLOYEE')){
               setIsAuthenticated(false)
             } else {
               setIsAuthenticated(true);
@@ -43,4 +38,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-export default PrivateRoute;
+export default EmployeeRoute;

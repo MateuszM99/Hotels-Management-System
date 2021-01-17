@@ -1,12 +1,31 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import './style.scss'
 import Hotel_Management_HotelCard from '../Hotel_Management_HotelCard/Hotel_Management_HotelCard'
 import { Button } from '../Button/Buttons'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import jwt_decode from "jwt-decode";
 
 function Hotel_Management_Header() {
+
+    let username = "";
+    const history = useHistory();
+    let [signedIn, setIsSignedIn] = useState(null);
+
+    if(localStorage.getItem('jwtToken') != null) {
+        const token = localStorage.getItem('jwtToken');
+        username = jwt_decode(token).sub
+        console.log(jwt_decode(token).sub)
+    }
+    useEffect(() => {
+        if (localStorage.getItem('jwtToken') != null) {
+            setIsSignedIn(true);
+            const token = localStorage.getItem('jwtToken');
+            username = jwt_decode(token).sub
+        }
+    }, [])
+
     return (
         <div className="hotel__management__header">
             <nav className="hotel__management__header__nav">
@@ -23,11 +42,14 @@ function Hotel_Management_Header() {
                 <div className="hotel__management__header__signedIn">
                     <span>
                         <PersonIcon />
-                        <p>Username</p>
+                        <p>{username}</p>
                     </span>
                     <span>
                         <ExitToAppIcon />
-                        <a>Sign out</a>
+                        <a onClick={() => {
+                            localStorage.removeItem("jwtToken")
+                            history.push('/');
+                        }}>Sign out</a>
                     </span>
                 </div>
             </nav>
