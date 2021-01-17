@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useReducer } from 'react';
 import { Formik, Form, yupToFormErrors, Field } from 'formik';
 import * as Yup from 'yup';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import './style.scss';
 import { DateSingleInput, Datepicker } from '@datepicker-react/styled'
 import { registerRequest } from '../../api/SignUpRequest'
@@ -25,6 +25,7 @@ function reducer(state, action) {
 
 function SignUp() {
 
+    const history = useHistory();
     const [date, setDate] = useState(null);
     const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -54,10 +55,11 @@ function SignUp() {
                         .required('Password is required'),
                 })}
 
-                onSubmit={(values) => {
+                onSubmit={async (values) => {
                     state.date.setDate(state.date.getDate() + 1);
                     values.dateOfBirth = state.date.toISOString().substring(0, 10);
-                    registerRequest(values);
+                    let response = await registerRequest(values);
+                    history.push("/");
                 }}
             >
                 {({ errors, touched, status, isSubmitting }) => (

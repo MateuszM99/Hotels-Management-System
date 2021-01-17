@@ -2,8 +2,13 @@ import React from 'react'
 import { Formik, Form, Field, yupToFormErrors } from 'formik'
 import * as Yup from 'yup'
 import { addRoom } from '../../api/RoomManagementRequest';
+import { useHistory, useParams } from 'react-router-dom';
 
 function AddRoom() {
+
+    const history = useHistory();
+    const {hotelName} = useParams();
+
     return (
         <div className="cm__rooms__create__container">
             <Formik
@@ -27,9 +32,15 @@ function AddRoom() {
                         .required('Description is required')
                 })}
 
-                onSubmit={(values, { setSubmitting, setStatus, resetForm }) => {
+                onSubmit={async (values, { setSubmitting, setStatus, resetForm }) => {
                     // console.log(values);
-                    addRoom(values);
+                    try{
+                    let response = await addRoom(values);
+                    history.push(`/management/hotelManage/${hotelName}/rooms/addRoom`)
+                    } 
+                    catch(err){
+
+                    }
                 }}
             >
                 {({ errors, touched, isSubmitting, status, setFieldValue }) => (
