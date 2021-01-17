@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import HotelCard from '../HotelCard/HotelCard'
 import './style.scss'
 import { useHistory } from 'react-router-dom'
-
+import { getAllHotels } from '../../api/HotelManagementRequest'
 
 function Hotels_List() {
 
@@ -15,8 +15,8 @@ function Hotels_List() {
         console.log(queryParams.get('search')); // daje nam search stringa
         async function getData() {
             try {
-                let response = null //request place await getProfileRequest();
-                console.log(response.data);
+                let response = await getAllHotels();
+                // console.log(response.data);
                 setHotels(response.data);
             } catch (err) {
                 // TODO if error
@@ -28,7 +28,7 @@ function Hotels_List() {
     return (
         <div className="hotel__main__list">
             {hotels?.map(hotel => {
-                <HotelCard key={hotel.id} />
+                return <HotelCard key={hotel.id} ht={hotel} />
             })}
         </div>
     )

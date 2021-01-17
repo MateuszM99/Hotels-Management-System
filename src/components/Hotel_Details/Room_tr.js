@@ -1,14 +1,26 @@
-import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Button } from '../Button/Buttons'
 import ReactBnbGallery from 'react-bnb-gallery';
 import 'react-bnb-gallery/dist/style.css'
+import { getUrlsByRoomId } from '../../api/PhotoManagementRequest';
 
+let images;
+
+async function getPhotos(roomId) {
+
+    try {
+        let test = await getUrlsByRoomId(roomId);
+        images = test.data;
+    } catch (error) {
+
+    }
+}
 
 function Room_tr(props) {
-    const images = [];
-    const [isOpen, setIsOpen] = useState(false);
+    getPhotos(props.rm.roomId);
 
+    const [isOpen, setIsOpen] = useState(false);
     return (
         <tr>
             <td>
@@ -16,13 +28,14 @@ function Room_tr(props) {
                     View images
                 </Button>
                 <ReactBnbGallery
-                show={isOpen}
-                photos={images}
-                onClose={() => setIsOpen(false)}
+                    show={isOpen}
+                    photos={images}
+                    onClose={() => setIsOpen(false)}
                 />
             </td>
-            <td>Adults</td>
-            <td>Standard</td>
+            <td>{props.rm.numberOfPeople}</td>
+            <td>{props.rm.price}</td>
+            <td>{props.rm.description}</td>
             <td>
                 <div>
                     <Button>Reserve</Button>
