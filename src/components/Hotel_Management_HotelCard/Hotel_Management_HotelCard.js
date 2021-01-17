@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '../Button/Buttons'
 import './style.scss'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function Hotel_Management_HotelCard(props) {
 
@@ -13,24 +13,18 @@ function Hotel_Management_HotelCard(props) {
             <div className="hotel__management__hotel__card__info">
                 <div className="hotel__management__hotel__card__header">
                     <div className="hotel__management__hotel__card__header__name__stars">
-                        <h3>Hotel Name</h3>
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>
+                        <h3>Hotel {props.ht.hotelId}</h3>
                     </div>
                     <div className="hotel__management__hotel__card__header__rating">
                         <span>
-                            <p style={{fontWeight:700,fontSize:"17px"}}>Znakomity</p>
-                            <p style={{color : "gray",fontSize:"12px"}}>2456 opini</p>
+                            <p style={{ fontWeight: 700, fontSize: "17px" }}>Number of stars</p>
                         </span>
-                        <Button small>9.5</Button>
+                        <Button small> {props.ht.numberOfStars}</Button>
                     </div>
                 </div>
-                <a>Location name</a>
+                <a>{props.ht.address}</a>
                 <span className="hotel__management__hotel__card__header__button">
-                    <Link to={`/management/hotelManage/${props.hotelName}`}>
+                    <Link to={`/management/hotelManage/${props.ht.hotelId}`}>
                         <Button>
                             Manage
                         </Button>
