@@ -1,17 +1,17 @@
-import React, { useReducer, useState, useEffect } from 'react'
-import { Button } from '../Button/Buttons'
+import React, {useReducer, useState, useEffect} from 'react'
+import {Button} from '../Button/Buttons'
 import ImageGallery from '../ImageGallery/ImageGallery'
 import './style.scss'
-import { DateRangeInput, DateSingleInput, Datepicker } from '@datepicker-react/styled'
+import {DateRangeInput, DateSingleInput, Datepicker} from '@datepicker-react/styled'
 import Select from 'react-select'
 import Room_tr from './Room_tr'
-import { date } from 'yup/lib/locale'
-import { useHistory, useParams } from 'react-router-dom'
-import { ThemeProvider } from "styled-components";
+import {date} from 'yup/lib/locale'
+import {useHistory, useParams} from 'react-router-dom'
+import {ThemeProvider} from "styled-components";
 import ReactBnbGallery from 'react-bnb-gallery';
 import 'react-bnb-gallery/dist/style.css'
-import { getRoomsByHotelId } from '../../api/RoomManagementRequest';
-import { getHotel } from '../../api/HotelManagementRequest';
+import {getRoomsByHotelId} from '../../api/RoomManagementRequest';
+import {getHotel} from '../../api/HotelManagementRequest';
 
 
 const initialState = {
@@ -23,7 +23,7 @@ const initialState = {
 function reducer(state, action) {
     switch (action.type) {
         case 'focusChange':
-            return { ...state, focusedInput: action.payload }
+            return {...state, focusedInput: action.payload}
         case 'dateChange':
             return action.payload
         default:
@@ -33,6 +33,7 @@ function reducer(state, action) {
 
 
 function Hotel_Details() {
+
 
     const PHOTOS = [];
 
@@ -45,16 +46,14 @@ function Hotel_Details() {
     const [childrenCheck, setChildrenCheck] = useState(0);
     const [state, dispatch] = useReducer(reducer, initialState)
     const [minDate, setMinDate] = useState(new Date());
-    const { hotelName } = useParams(); // hotel id 
+    const {hotelName} = useParams(); // hotel id
 
     useEffect(() => {
         async function getData() {
 
 
-
             try {
                 let hotelResponse = await getHotel(hotelName);
-                // console.log(hotelResponse);
                 setHotel(hotelResponse.data);
                 let roomResponse = await getRoomsByHotelId(hotelName);
                 setRooms(roomResponse.data);
@@ -63,8 +62,17 @@ function Hotel_Details() {
             }
 
         }
+
         getData();
     }, [])
+
+    const createStars = () => {
+        let table = [];
+        for (var i = 0; i < hotel.numberOfStars; i++) {
+            table.push(<img src="https://img.icons8.com/officexs/16/000000/filled-star.png"/>)
+        }
+        return table;
+    }
 
     const handleAvailibilityAdults = (e) => {
         setAdultsCheck(e.target.value);
@@ -83,7 +91,6 @@ function Hotel_Details() {
 
         try {
             let response = null // wasz request
-            console.log(response.data);
             setRooms(response.data);
         } catch (err) {
             // TODO if error
@@ -118,17 +125,15 @@ function Hotel_Details() {
                 <div className="hotel__details__main">
                     <div className="hotel__details__header">
                         <h3>Hotel {hotelName}</h3>
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
-                        <img src="https://img.icons8.com/officexs/16/000000/filled-star.png" />
+                        {
+                            createStars()
+                        }
                     </div>
                     <div className="hotel__details__address">
                         <img src="https://img.icons8.com/material-sharp/24/000000/marker.png"></img>
                         <p>{hotel.address}</p>
                     </div>
-                    <ImageGallery />
+                    <ImageGallery/>
                 </div>
                 <div className="hotel__details__description">
                     <div className="hotel__details__description__text">
@@ -136,7 +141,8 @@ function Hotel_Details() {
                         <h3>Number of stars: {hotel.numberOfStars} </h3>
                     </div>
                     <div className="hotel__details__description__reserve">
-                        <img src="https://cf.bstatic.com/xdata/images/xphoto/max240x120/39352933.webp?k=bfaf8a27a70ea05bf329f8bc8d779fd981a068c7bd2edbab42e4bb89fe570ac8&o="></img>
+                        <img
+                            src="https://cf.bstatic.com/xdata/images/xphoto/max240x120/39352933.webp?k=bfaf8a27a70ea05bf329f8bc8d779fd981a068c7bd2edbab42e4bb89fe570ac8&o="></img>
                         <Button marginBottom="10px">Reserve now</Button>
                     </div>
                 </div>
@@ -145,8 +151,8 @@ function Hotel_Details() {
                     <div className="hotel__details__availibility__settings">
                         <div className="hotel__details__availibility__date__picker">
                             <DateRangeInput
-                                onDatesChange={data => dispatch({ type: 'dateChange', payload: data })}
-                                onFocusChange={focusedInput => dispatch({ type: 'focusChange', payload: focusedInput })}
+                                onDatesChange={data => dispatch({type: 'dateChange', payload: data})}
+                                onFocusChange={focusedInput => dispatch({type: 'focusChange', payload: focusedInput})}
                                 startDate={state.startDate}
                                 endDate={state.endDate}
                                 focusedInput={state.focusedInput}
@@ -175,18 +181,18 @@ function Hotel_Details() {
                 <div className="hotel__details__rooms__list">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Images</th>
-                                <th>Persons</th>
-                                <th>Price</th>
-                                <th>Description</th>
-                                <th></th>
-                            </tr>
+                        <tr>
+                            <th>Images</th>
+                            <th>Persons</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th></th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {rooms?.map(room => {
-                                return <Room_tr key={room.roomId} rm={room} />
-                            })}
+                        {rooms?.map(room => {
+                            return <Room_tr key={room.roomId} rm={room}/>
+                        })}
                         </tbody>
                     </table>
                 </div>

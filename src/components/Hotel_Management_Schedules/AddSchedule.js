@@ -44,8 +44,10 @@ function AddSchedule() {
                 })
                 }
 
-                onSubmit={(values, {setSubmitting, setStatus, resetForm}) => {
-                    createSchedule(values, localStorage.getItem('jwtToken'))
+                onSubmit={(values, actions) => {
+                    createSchedule(values, localStorage.getItem('jwtToken')).catch(error => {
+                        actions.setStatus({errorMessage: "Given date start time is after end time or start date is in the past"})
+                    })
                 }}
             >
                 {({errors, touched, isSubmitting, status, setFieldValue}) => (
@@ -77,7 +79,12 @@ function AddSchedule() {
                     <label className="cm__schedules__create__container__label">Employee Id</label>
                     <Field className="cm__schedules__create__container__input" name="employeeId"/>
                     </span>
-                        <button className="cm__schedules__create__container__create__button" type="submit">Add schedule</button>
+                        <button className="cm__schedules__create__container__create__button" type="submit">Add
+                            schedule
+                        </button>
+                        {status && status.errorMessage ? (
+                            <div className="cm__schedules__create__container__validation">{status.errorMessage}</div>
+                        ) : null}
                     </Form>
                 )}
             </Formik>

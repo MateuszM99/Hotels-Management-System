@@ -1,8 +1,8 @@
 import React from 'react'
-import { Formik, Form, Field, yupToFormErrors } from 'formik'
+import {Formik, Form, Field, yupToFormErrors} from 'formik'
 import * as Yup from 'yup'
-import { addRoom } from '../../api/RoomManagementRequest';
-import { useHistory, useParams } from 'react-router-dom';
+import {addRoom} from '../../api/RoomManagementRequest';
+import {useHistory, useParams} from 'react-router-dom';
 
 function AddRoom() {
 
@@ -32,18 +32,16 @@ function AddRoom() {
                         .required('Description is required')
                 })}
 
-                onSubmit={async (values, { setSubmitting, setStatus, resetForm }) => {
-                    // console.log(values);
-                    try{
-                    let response = await addRoom(values);
-                    history.push(`/management/hotelManage/${hotelName}/rooms/addRoom`)
-                    } 
-                    catch(err){
+                onSubmit={async (values, {setSubmitting, setStatus, resetForm}) => {
+                    try {
+                        let response = await addRoom(values);
+                        history.push(`/management/hotelManage/${hotelName}/rooms/addRoom`)
+                    } catch (err) {
 
                     }
                 }}
             >
-                {({ errors, touched, isSubmitting, status, setFieldValue }) => (
+                {({errors, touched, isSubmitting, status, setFieldValue}) => (
                     <Form>
                         <h2>Add room</h2>
                         {/* <span>
@@ -52,25 +50,30 @@ function AddRoom() {
                         <option>New</option>
                     </Field>
                     </span> */}
-                        {errors.productId && touched.productId ? <div className="cm__rooms__create__container__validation">{errors.productId}</div> : null}
+                        {errors.productId && touched.productId ?
+                            <div className="cm__rooms__create__container__validation">{errors.productId}</div> : null}
                         <span>
                             <label className="cm__rooms__create__container__label">Hotel id:</label>
                             <Field className="cm__rooms__create__container__input" name="hotelId"></Field>
                         </span>
-                        {errors.name && touched.name ? <div className="cm__rooms__create__container__validation">{errors.name}</div> : null}
+                        {errors.name && touched.name ?
+                            <div className="cm__rooms__create__container__validation">{errors.name}</div> : null}
                         <span>
                             <label className="cm__rooms__create__container__label">Price:</label>
                             <Field className="cm__rooms__create__container__input" name="price"></Field>
                         </span>
-                        {errors.price && touched.price ? <div className="cm__rooms__create__container__validation">{errors.price}</div> : null}
+                        {errors.price && touched.price ?
+                            <div className="cm__rooms__create__container__validation">{errors.price}</div> : null}
                         <span>
                             <label className="cm__rooms__create__container__label">Persons:</label>
                             <Field className="cm__rooms__create__container__input" name="numberOfPeople"></Field>
                         </span>
-                        {errors.sku && touched.sku ? <div className="cm__rooms__create__container__validation">{errors.sku}</div> : null}
+                        {errors.sku && touched.sku ?
+                            <div className="cm__rooms__create__container__validation">{errors.sku}</div> : null}
                         {/* <span>
                         </span> */}
-                        {errors.category && touched.category ? <div className="cm__rooms__create__container__validation">{errors.category}</div> : null}
+                        {errors.category && touched.category ?
+                            <div className="cm__rooms__create__container__validation">{errors.category}</div> : null}
                         {/* <span>
                             <label className="cm__rooms__create__container__label">Image:</label>
                             <input className="cm__rooms__create__container__file" id="image" name="image" type="file"
@@ -80,7 +83,8 @@ function AddRoom() {
                         {errors.image && touched.image ? <div className="cm__rooms__create__container__validation">{errors.image}</div> : null} */}
                         <span>
                             <label className="cm__rooms__create__container__label">Description:</label>
-                            <Field className="cm__rooms__create__container__textarea" as="textarea" name="description"></Field>
+                            <Field className="cm__rooms__create__container__textarea" as="textarea"
+                                   name="description"></Field>
                         </span>
                         <button className="cm__rooms__create__container__create__button" type="submit">Add room</button>
                     </Form>

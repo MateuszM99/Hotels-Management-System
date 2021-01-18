@@ -50,7 +50,6 @@ function Room_Reservation_Form() {
 
                         onSubmit={(values) => {
                             createReservation(values, roomId);
-                            // console.log(values);
                         }}
                     >
                         {({errors, touched, status, isSubmitting, setFieldValue}) => (

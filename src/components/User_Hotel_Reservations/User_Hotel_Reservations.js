@@ -14,7 +14,6 @@ function User_Hotel_Reservations() {
         async function getData() {
             try {
                 let response = await getReservations();
-                console.log(response.data);
                 setReservations(response.data);
             } catch (err) {
                 // TODO if error

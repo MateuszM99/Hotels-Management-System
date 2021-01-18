@@ -3,7 +3,6 @@ import './style.scss'
 import {Link} from 'react-router-dom'
 
 function ReservationTR(props) {
-    console.log(props.res.reservationId);
     return (
         <tr>
             <td>{props.res.roomId}</td>
