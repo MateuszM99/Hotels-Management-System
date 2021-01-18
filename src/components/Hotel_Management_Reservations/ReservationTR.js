@@ -3,6 +3,7 @@ import './style.scss'
 import {Link} from 'react-router-dom'
 
 function ReservationTR(props) {
+    console.log(props.res.reservationId);
     return (
         <tr>
             <td>{props.res.roomId}</td>
@@ -11,12 +12,12 @@ function ReservationTR(props) {
             <td>{props.res.endDate}</td>
             <td>
                 <div className="cm__employees__container__actions">
-                    <button className="cm__employees__container__employee__button">Delete</button>
+                    <button className="cm__employees__container__employee__button"
+                            onClick={() => props.onClick(props.res.reservationId)}>Delete
+                    </button>
                 </div>
             </td>
         </tr>
-
-
     )
 }
 

@@ -22,3 +22,8 @@ export function getReservations() {
 export function getAllReservations() {
     return axios.get(`${baseUrl}admin/reservations`, {headers: {'Authorization': "Bearer " + localStorage.getItem("jwtToken")}});
 }
+
+export function deleteReservation(reservationId) {
+    console.log(reservationId);
+    return axios.delete(`${baseUrl}admin/reservations/${reservationId}`, {headers: {'Authorization': "Bearer " + localStorage.getItem("jwtToken")}});
+}
